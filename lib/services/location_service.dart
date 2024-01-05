@@ -1,33 +1,10 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:convert';
-
-import 'package:aeroaura/models/weather.dart';
-import 'package:flutter/foundation.dart';
+import 'package:aeroaura/models/location.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart' as http;
+import 'package:geocoding/geocoding.dart';
 
-class WeatherService {
-  Future<Weather> fetchWeather() async {
-    if (kDebugMode) {
-      print('fetching');
-    }
-    Position position = await _determinePosition();
-    // print(position.latitude);
-    // print(position.longitude);
-    String url =
-        'https://api.open-meteo.com/v1/forecast?latitude=${position.latitude}&longitude=${position.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,weather_code,cloud_cover,surface_pressure,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,surface_pressure,visibility,wind_speed_10m,wind_direction_10m,uv_index,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_sum,precipitation_hours,precipitation_probability_max,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FBangkok&past_days=7&past_hours=1&forecast_hours=1';
-    final Uri uri = Uri.parse(url);
-    final http.Response response = await http.get(uri);
-    if (response.statusCode == 200) {
-      final String body = response.body;
-      final dynamic json = jsonDecode(body);
-      return Weather.fromJson(json);
-    } else {
-      throw Exception('Failed to Load Weather');
-    }
-  }
-
+class LocationService {
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -64,6 +41,18 @@ class WeatherService {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.bestForNavigation);
+        desiredAccuracy: LocationAccuracy.high);
+  }
+
+  Future<Venue> GetLocation() async {
+    Position position = await _determinePosition();
+    List<Placemark> placemark =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+
+    Map<String, dynamic> location = Map.from({
+      'city': placemark.first.administrativeArea,
+      'country': placemark.first.country
+    });
+    return Venue.fromJson(location);
   }
 }

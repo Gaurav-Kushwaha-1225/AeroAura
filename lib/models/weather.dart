@@ -1,13 +1,13 @@
-class Weather {
-  final String city;
-  final double temperature;
+// ignore_for_file: non_constant_identifier_names
 
-  Weather({required this.city, required this.temperature});
+class Weather {
+  final Map<String, dynamic> current;
+  final Map<String, dynamic> current_units;
+
+  Weather({required this.current_units, required this.current});
 
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
-      city: json['name'],
-      temperature: json['main']['temp'].toDouble(),
-    );
+        current_units: json['current_units'], current: json['current']);
   }
 }

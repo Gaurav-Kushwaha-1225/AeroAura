@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:aeroaura/services/weather_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/const.dart';
@@ -32,7 +31,8 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                 tomorrowColor = false;
                 next7Color = false;
                 setState(() {
-                  WeatherService().fetchWeather();
+                  // WeatherService().fetchWeather();
+                  // LocationService().GetLocation();
                 });
               });
             },
