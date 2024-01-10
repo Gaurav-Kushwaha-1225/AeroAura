@@ -1,16 +1,17 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:aeroaura/utils/functions.dart';
+import 'package:aeroaura/utils/WMO_CodeToComment.dart';
 import 'package:flutter/material.dart';
 
 class SunsetWidget extends StatefulWidget {
-  final String apparent_temp;
-  final bool isDay;
+  final int WMOCode;
+  final int isDay;
   final String sunset;
   final String sunrise;
   const SunsetWidget(
       {Key? key,
-      required this.apparent_temp,
+      required this.WMOCode,
       required this.isDay,
       required this.sunrise,
       required this.sunset})
@@ -21,10 +22,11 @@ class SunsetWidget extends StatefulWidget {
 }
 
 class _SunsetWidgetState extends State<SunsetWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +34,11 @@ class _SunsetWidgetState extends State<SunsetWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              "Feels like ${widget.apparent_temp}",
+              widget.isDay == 1
+                  ? WMO_CodeToComment.WMO_Code[widget.WMOCode.toString()]![
+                      "day"]!["description"]!
+                  : WMO_CodeToComment.WMO_Code[widget.WMOCode.toString()]![
+                      "night"]!["description"]!,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
             ),
             const SizedBox(
@@ -46,22 +52,22 @@ class _SunsetWidgetState extends State<SunsetWidget> {
               width: 13,
             ),
             Text(
-              widget.isDay
-                  ? "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}"
-                  : "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}",
+              widget.isDay == 1
+                  ? "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}"
+                  : "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}",
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
-            )
+            ),
           ],
         ),
         const SizedBox(
           height: 5,
         ),
         Text(
-          widget.isDay
-              ? "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}"
-              : "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}",
+          widget.isDay == 1
+              ? "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}"
+              : "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}",
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
-        )
+        ),
       ],
     );
   }

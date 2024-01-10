@@ -1,17 +1,16 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempWidget.dart';
+import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/material.dart';
 
 class VerticalTimeTempDisplay extends StatefulWidget {
   final Map<String, dynamic> hourly;
   final Map<String, dynamic> hourly_units;
-  final bool isDay;
   const VerticalTimeTempDisplay(
       {Key? key,
       required this.hourly,
-      required this.hourly_units,
-      required this.isDay})
+      required this.hourly_units})
       : super(key: key);
 
   @override
@@ -55,16 +54,15 @@ class _VerticalTimeTempDisplayState extends State<VerticalTimeTempDisplay> {
                   return VerticalTimeTempWidget(
                     time: widget.hourly['time'][index],
                     temp: widget.hourly['temperature_2m'][index].round().toString(),
+                    WMOCode: widget.hourly['weather_code'][index].toString(),
+                    isDay: widget.hourly['is_day'][index],
                   );
                 },
                 childCount: widget.hourly['time'].length,
               ),
             ),
-            SliverToBoxAdapter(
-              child: Container(
-                width: 15,
-              ),
-            )
+            const SizedBoxInSliver(height: 0, width: 15),
+            
           ],
         ),
       ),

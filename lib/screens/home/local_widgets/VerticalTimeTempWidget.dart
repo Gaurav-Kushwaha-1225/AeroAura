@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, camel_case_types, non_constant_identifier_names
 
+import 'package:aeroaura/utils/WMO_CodeToComment.dart';
 import 'package:aeroaura/utils/const.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,14 @@ import 'package:flutter/material.dart';
 class VerticalTimeTempWidget extends StatefulWidget {
   final String time;
   final String temp;
+  final String WMOCode;
+  final int isDay;
   const VerticalTimeTempWidget(
-      {Key? key, required this.time, required this.temp})
+      {Key? key,
+      required this.time,
+      required this.temp,
+      required this.WMOCode,
+      required this.isDay})
       : super(key: key);
 
   @override
@@ -45,9 +52,16 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
                     width: 45,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22.5),
-                        color: Colors.blue.shade50),
-                    child: const Icon(Icons.wb_sunny_rounded,
-                        color: Colors.black87, size: 26),
+                        color: Colors.lightBlueAccent),
+                    child: Image.network(
+                      widget.isDay == 1
+                          ? WMO_CodeToComment
+                              .WMO_Code[widget.WMOCode]!["day"]!["image"]!
+                          : WMO_CodeToComment
+                              .WMO_Code[widget.WMOCode]!["night"]!["image"]!,
+                      height: 26,
+                      width: 26,
+                    ),
                   ),
                   const SizedBox(height: 7),
                   Row(

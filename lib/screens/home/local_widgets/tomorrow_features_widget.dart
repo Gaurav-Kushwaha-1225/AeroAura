@@ -16,7 +16,6 @@ class TomorrowFeaturesWidget extends StatefulWidget {
 }
 
 class _TomorrowFeaturesWidgetState extends State<TomorrowFeaturesWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,8 +46,12 @@ class _TomorrowFeaturesWidgetState extends State<TomorrowFeaturesWidget> {
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(27),
                       color: Colors.blue.shade50),
-                  child: const Icon(CupertinoIcons.sunrise_fill,
-                      color: Colors.black87, size: 27),
+                  child: Icon(
+                      widget.SunriseOrSunset == "Sunrise Time"
+                          ? CupertinoIcons.sunrise_fill
+                          : CupertinoIcons.sunset_fill,
+                      color: Colors.black87,
+                      size: 27),
                 ),
                 const SizedBox(height: 7),
                 Text(ConvertTimeTo12HrFormat(widget.time),

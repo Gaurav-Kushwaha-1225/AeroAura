@@ -91,6 +91,12 @@ class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
             value: widget.isToday
                 ? widget.daily["temperature_2m_min"][0].toString() : 
                 widget.daily["temperature_2m_min"][1].toString()),
+        CurrentWeatherFeaturesWidget(
+            feature: "Feels Like",
+            icon: CupertinoIcons.thermometer_sun,
+            value: widget.isToday
+                ? widget.current["apparent_temperature"].toString() : 
+                widget.hourly["apparent_temperature"].last.toString()),
       ],
     );
   }

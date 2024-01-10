@@ -4,9 +4,11 @@ import 'package:aeroaura/screens/home/local_widgets/appBar.dart';
 import 'package:aeroaura/screens/home/local_widgets/current_weather_features.dart';
 import 'package:aeroaura/screens/home/local_widgets/day_date_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/hori_navigator.dart';
+import 'package:aeroaura/screens/home/local_widgets/location_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/sunset_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/temperature_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
+import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/material.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
@@ -55,17 +57,20 @@ class _HomePageState extends State<HomePage> {
               primary: true,
               physics: const BouncingScrollPhysics(),
               slivers: [
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 10,
-                  ),
-                ),
-                const SliverToBoxAdapter(child: DayDateWidget()),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 5,
-                  ),
-                ),
+                const SizedBoxInSliver(height: 10, width: 0),
+                SliverToBoxAdapter(child: FutureBuilder<Weather>(
+                    future: futureWeather,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return DayDateWidget(WMOCode: snapshot.data!.current["weather_code"].toString(),
+                        isDay: snapshot.data!.current["is_day"],);
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  )),
+                const SizedBoxInSliver(height: 5, width: 0),
                 SliverToBoxAdapter(
                   child: FutureBuilder<Weather>(
                     future: futureWeather,
@@ -90,12 +95,9 @@ class _HomePageState extends State<HomePage> {
                     future: futureLocation,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return Text(
-                          "${(snapshot.data!.city).toString()}, ${(snapshot.data!.country).toString()}",
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.w200),
-                        );
+                        return LocationWidget(
+                            city: (snapshot.data!.city).toString(),
+                            country: (snapshot.data!.country).toString());
                       } else if (snapshot.hasError) {
                         return Text('${snapshot.error}');
                       }
@@ -103,22 +105,16 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 20,
-                  ),
-                ),
+                
+                const SizedBoxInSliver(height: 20, width: 0),
                 SliverToBoxAdapter(
                   child: FutureBuilder<Weather>(
                     future: futureWeather,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return SunsetWidget(
-                          apparent_temp:
-                              "${(snapshot.data!.current['apparent_temperature']).toString()} ${(snapshot.data!.current_units['apparent_temperature']).toString()}",
-                          isDay: snapshot.data!.current['is_day'] == 1
-                              ? true
-                              : false,
+                          WMOCode: snapshot.data!.current['weather_code'],
+                          isDay: snapshot.data!.current['is_day'],
                           sunrise: snapshot.data!.daily['sunrise'][0],
                           sunset: snapshot.data!.daily['sunset'][0],
                         );
@@ -129,20 +125,15 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 18,
-                  ),
-                ),
-                SliverToBoxAdapter(
-                    child: HorizontalNavigator(
+                const SizedBoxInSliver(height: 18, width: 0),
+                HorizontalNavigator(
                   onPressed: (index) {
                     setState(() {
                       widgetIndex = index;
                     });
                   },
                   activeIndex: widgetIndex,
-                )),
+                ),
                 SliverToBoxAdapter(
                   child: AnimatedSwitcher(
                     duration: const Duration(milliseconds: 500),
@@ -162,11 +153,6 @@ class _HomePageState extends State<HomePage> {
                                         hourly: snapshot.data!.hourly,
                                         hourly_units:
                                             snapshot.data!.hourly_units,
-                                        isDay:
-                                            snapshot.data!.current['is_day'] ==
-                                                    1
-                                                ? true
-                                                : false,
                                       ),
                                       CurrentWeatherFeatures(
                                         current: snapshot.data!.current,
