@@ -5,18 +5,17 @@ import 'package:flutter/material.dart';
 import '../../../utils/const.dart';
 
 class HorizontalNavigator extends StatefulWidget {
-  const HorizontalNavigator({Key? key}) : super(key: key);
+  final Function(int) onPressed;
+  final int activeIndex;
+  const HorizontalNavigator(
+      {Key? key, required this.onPressed, required this.activeIndex})
+      : super(key: key);
 
   @override
   State<HorizontalNavigator> createState() => _HorizontalNavigatorState();
 }
 
 class _HorizontalNavigatorState extends State<HorizontalNavigator> {
-  // int taskBarDay = 0;
-  bool todayColor = true;
-  bool tomorrowColor = false;
-  bool next7Color = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -25,21 +24,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
       mainAxisSize: MainAxisSize.max,
       children: [
         TextButton(
-            onPressed: () {
-              setState(() {
-                todayColor = true;
-                tomorrowColor = false;
-                next7Color = false;
-                setState(() {
-                  // WeatherService().fetchWeather();
-                  // LocationService().GetLocation();
-                });
-              });
-            },
+            onPressed: () => widget.onPressed(0),
             style: const ButtonStyle(
-                overlayColor: MaterialStatePropertyAll(
-                    Colors.transparent)
-            ),
+                overlayColor: MaterialStatePropertyAll(Colors.transparent)),
             child: Column(
               children: [
                 const Text(
@@ -55,7 +42,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                 Icon(
                   Icons.circle_rounded,
                   size: 8,
-                  color: todayColor ? Colors.black : Colors.transparent,
+                  color: widget.activeIndex == 0
+                      ? Colors.black
+                      : Colors.transparent,
                 )
               ],
             )),
@@ -63,17 +52,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
           width: 5,
         ),
         TextButton(
-            onPressed: () {
-              setState(() {
-                todayColor = false;
-                tomorrowColor = true;
-                next7Color = false;
-              });
-            },
+            onPressed: () => widget.onPressed(1),
             style: const ButtonStyle(
-                overlayColor: MaterialStatePropertyAll(
-                    Colors.transparent)
-            ),
+                overlayColor: MaterialStatePropertyAll(Colors.transparent)),
             child: Column(
               children: [
                 const Text(
@@ -89,7 +70,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                 Icon(
                   Icons.circle_rounded,
                   size: 8,
-                  color: tomorrowColor ? Colors.black : Colors.transparent,
+                  color: widget.activeIndex == 1
+                      ? Colors.black
+                      : Colors.transparent,
                 )
               ],
             )),
@@ -99,20 +82,13 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
         Directionality(
             textDirection: TextDirection.rtl,
             child: ElevatedButton.icon(
-              onPressed: () {
-                setState(() {
-                  todayColor = false;
-                  tomorrowColor = false;
-                  next7Color = true;
-                });
-              },
-              style:  ButtonStyle(
-                  overlayColor: const MaterialStatePropertyAll(
-                      Colors.transparent),
+              onPressed: () => widget.onPressed(2),
+              style: ButtonStyle(
+                  overlayColor:
+                      const MaterialStatePropertyAll(Colors.transparent),
                   elevation: MaterialStateProperty.all(0),
                   backgroundColor:
-                  MaterialStateProperty.all(Constants.lightPrimary)
-              ),
+                      MaterialStateProperty.all(Constants.lightPrimary)),
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 18,
@@ -133,7 +109,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                   Icon(
                     Icons.circle_rounded,
                     size: 8,
-                    color: next7Color ? Colors.blue : Colors.transparent,
+                    color: widget.activeIndex == 2
+                        ? Colors.blue
+                        : Colors.transparent,
                   )
                 ],
               ),

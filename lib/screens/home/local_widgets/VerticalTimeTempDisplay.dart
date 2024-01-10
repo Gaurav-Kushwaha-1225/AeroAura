@@ -1,10 +1,18 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempWidget.dart';
 import 'package:flutter/material.dart';
 
 class VerticalTimeTempDisplay extends StatefulWidget {
-  const VerticalTimeTempDisplay({Key? key}) : super(key: key);
+  final Map<String, dynamic> hourly;
+  final Map<String, dynamic> hourly_units;
+  final bool isDay;
+  const VerticalTimeTempDisplay(
+      {Key? key,
+      required this.hourly,
+      required this.hourly_units,
+      required this.isDay})
+      : super(key: key);
 
   @override
   State<VerticalTimeTempDisplay> createState() =>
@@ -12,22 +20,21 @@ class VerticalTimeTempDisplay extends StatefulWidget {
 }
 
 class _VerticalTimeTempDisplayState extends State<VerticalTimeTempDisplay> {
-  ScrollController scrollController = ScrollController();
+  // ScrollController scrollController = ScrollController();
 
-  @override
-  void initState() {
-    scrollController = ScrollController()
-      ..addListener(() {
-        setState(() {});
-      });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   scrollController = ScrollController()
+  //     ..addListener(() {
+  //       setState(() {});
+  //     });
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 180,
-      // color: Colors.red,
       padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
       child: ShaderMask(
         shaderCallback: (Rect bounds) {
@@ -39,14 +46,18 @@ class _VerticalTimeTempDisplayState extends State<VerticalTimeTempDisplay> {
         },
         child: CustomScrollView(
           scrollDirection: Axis.horizontal,
-          controller: scrollController,
+          shrinkWrap: true,
+          primary: false,
           slivers: <Widget>[
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return const VerticalTimeTempWidget();
+                  return VerticalTimeTempWidget(
+                    time: widget.hourly['time'][index],
+                    temp: widget.hourly['temperature_2m'][index].round().toString(),
+                  );
                 },
-                childCount: 12,
+                childCount: widget.hourly['time'].length,
               ),
             ),
             SliverToBoxAdapter(
