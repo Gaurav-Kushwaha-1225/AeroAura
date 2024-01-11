@@ -27,6 +27,5 @@ class _LocationWidgetState extends State<LocationWidget> {
         ),
       ],
     );
-  
   }
 }

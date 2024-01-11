@@ -8,9 +8,7 @@ class VerticalTimeTempDisplay extends StatefulWidget {
   final Map<String, dynamic> hourly;
   final Map<String, dynamic> hourly_units;
   const VerticalTimeTempDisplay(
-      {Key? key,
-      required this.hourly,
-      required this.hourly_units})
+      {Key? key, required this.hourly, required this.hourly_units})
       : super(key: key);
 
   @override
@@ -53,7 +51,9 @@ class _VerticalTimeTempDisplayState extends State<VerticalTimeTempDisplay> {
                 (BuildContext context, int index) {
                   return VerticalTimeTempWidget(
                     time: widget.hourly['time'][index],
-                    temp: widget.hourly['temperature_2m'][index].round().toString(),
+                    temp: widget.hourly['temperature_2m'][index]
+                        .round()
+                        .toString(),
                     WMOCode: widget.hourly['weather_code'][index].toString(),
                     isDay: widget.hourly['is_day'][index],
                   );
@@ -62,7 +62,6 @@ class _VerticalTimeTempDisplayState extends State<VerticalTimeTempDisplay> {
               ),
             ),
             const SizedBoxInSliver(height: 0, width: 15),
-            
           ],
         ),
       ),

@@ -59,44 +59,44 @@ class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
             feature: "Air pressure",
             icon: CupertinoIcons.wind,
             value: widget.isToday
-                ? widget.current["surface_pressure"].toString() : 
-                widget.hourly["surface_pressure"].last.toString()),
+                ? widget.current["surface_pressure"].toString()
+                : widget.hourly["surface_pressure"].last.toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Cloud Cover",
             icon: CupertinoIcons.cloud_fill,
             value: widget.isToday
-                ? widget.current["cloud_cover"].toString() : 
-                widget.current["cloud_cover"].toString()),
+                ? widget.current["cloud_cover"].toString()
+                : widget.current["cloud_cover"].toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Visibility",
             icon: CupertinoIcons.eye_solid,
             value: widget.isToday
-                ? widget.hourly["visibility"][0].toString():
-                widget.hourly["visibility"].last.toString()),
+                ? widget.hourly["visibility"][0].toString()
+                : widget.hourly["visibility"].last.toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Rain's Odds",
             icon: CupertinoIcons.cloud_rain_fill,
             value: widget.isToday
-                ? widget.hourly["precipitation_probability"][0].toString() :
-                widget.daily["precipitation_probability_max"][1].toString()),
+                ? widget.hourly["precipitation_probability"][0].toString()
+                : widget.daily["precipitation_probability_max"][1].toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Max Temp",
             icon: CupertinoIcons.sun_max_fill,
             value: widget.isToday
-                ? widget.daily["temperature_2m_max"][0].toString()  :
-                widget.daily["temperature_2m_max"][1].toString()),
+                ? widget.daily["temperature_2m_max"][0].toString()
+                : widget.daily["temperature_2m_max"][1].toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Min Temp",
             icon: CupertinoIcons.sun_min_fill,
             value: widget.isToday
-                ? widget.daily["temperature_2m_min"][0].toString() : 
-                widget.daily["temperature_2m_min"][1].toString()),
+                ? widget.daily["temperature_2m_min"][0].toString()
+                : widget.daily["temperature_2m_min"][1].toString()),
         CurrentWeatherFeaturesWidget(
             feature: "Feels Like",
             icon: CupertinoIcons.thermometer_sun,
             value: widget.isToday
-                ? widget.current["apparent_temperature"].toString() : 
-                widget.hourly["apparent_temperature"].last.toString()),
+                ? widget.current["apparent_temperature"].toString()
+                : widget.hourly["apparent_temperature"].last.toString()),
       ],
     );
   }

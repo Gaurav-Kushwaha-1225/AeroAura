@@ -1,4 +1,5 @@
 import 'package:aeroaura/screens/home/home.dart';
+import 'package:aeroaura/screens/next_7_days/next_7_days.dart';
 import 'package:aeroaura/utils/themes.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class AeroAura extends StatelessWidget {
       theme: AeroTheme.lightTheme,
       darkTheme: AeroTheme.darkTheme,
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: const NextSevenDays(),
     );
   }
 }

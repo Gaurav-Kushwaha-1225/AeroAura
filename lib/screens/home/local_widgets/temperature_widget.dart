@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 class TemperatureWidget extends StatefulWidget {
   final String temp;
   final String temp_unit;
-  const TemperatureWidget({Key? key, required this.temp, required this.temp_unit}) : super(key: key);
+  const TemperatureWidget(
+      {Key? key, required this.temp, required this.temp_unit})
+      : super(key: key);
 
   @override
   State<TemperatureWidget> createState() => _TemperatureWidgetState();
@@ -14,7 +16,7 @@ class TemperatureWidget extends StatefulWidget {
 class _TemperatureWidgetState extends State<TemperatureWidget> {
   @override
   Widget build(BuildContext context) {
-    return  SizedBox(
+    return SizedBox(
       height: 125,
       child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -58,18 +58,22 @@ class _HomePageState extends State<HomePage> {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 const SizedBoxInSliver(height: 10, width: 0),
-                SliverToBoxAdapter(child: FutureBuilder<Weather>(
-                    future: futureWeather,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return DayDateWidget(WMOCode: snapshot.data!.current["weather_code"].toString(),
-                        isDay: snapshot.data!.current["is_day"],);
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
-                      }
-                      return const CircularProgressIndicator();
-                    },
-                  )),
+                SliverToBoxAdapter(
+                    child: FutureBuilder<Weather>(
+                  future: futureWeather,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return DayDateWidget(
+                        WMOCode:
+                            snapshot.data!.current["weather_code"].toString(),
+                        isDay: snapshot.data!.current["is_day"],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                )),
                 const SizedBoxInSliver(height: 5, width: 0),
                 SliverToBoxAdapter(
                   child: FutureBuilder<Weather>(
@@ -105,7 +109,6 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                 ),
-                
                 const SizedBoxInSliver(height: 20, width: 0),
                 SliverToBoxAdapter(
                   child: FutureBuilder<Weather>(
