@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, non_constant_identifier_names
 
 import 'package:aeroaura/utils/WMO_CodeToComment.dart';
-import 'package:aeroaura/utils/const.dart';
+import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +52,7 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
                     width: 45,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22.5),
-                        color: Colors.lightBlueAccent),
+                        color: Colors.lightBlueAccent.withOpacity(0.5)),
                     child: Image.network(
                       widget.isDay == 1
                           ? WMO_CodeToComment

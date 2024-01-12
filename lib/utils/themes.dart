@@ -1,4 +1,4 @@
-import 'package:aeroaura/utils/const.dart';
+import 'package:aeroaura/utils/consts.dart';
 import 'package:flutter/material.dart';
 
 // enum CurrentTheme { dark, light }

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../../../utils/const.dart';
+import '../../../utils/consts.dart';
 
 class CloudBG extends StatefulWidget {
   final int cloudNumber;

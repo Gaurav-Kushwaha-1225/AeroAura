@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'package:aeroaura/utils/const.dart';
+import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

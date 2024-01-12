@@ -129,13 +129,28 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 const SizedBoxInSliver(height: 18, width: 0),
-                HorizontalNavigator(
-                  onPressed: (index) {
-                    setState(() {
-                      widgetIndex = index;
-                    });
-                  },
-                  activeIndex: widgetIndex,
+                SliverToBoxAdapter(
+                  child: FutureBuilder<Weather>(
+                    future: futureWeather,
+                    builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                          return HorizontalNavigator(
+                      onPressed: (index) {
+                        setState(() {
+                          widgetIndex = index;
+                        });
+                      },
+                      activeIndex: widgetIndex,
+                      daily: snapshot.data!.daily,
+                      daily_units: snapshot.data!.daily_units,
+                    );
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return const CircularProgressIndicator();
+                    },
+                    
+                  ),
                 ),
                 SliverToBoxAdapter(
                   child: AnimatedSwitcher(
@@ -216,8 +231,7 @@ class _HomePageState extends State<HomePage> {
                               )
                             : Container(
                                 key: UniqueKey(),
-                                height: 300,
-                                color: Colors.amber,
+                                color: Colors.transparent,
                               ),
                     transitionBuilder:
                         (Widget child, Animation<double> animation) {

@@ -1,17 +1,22 @@
-import 'package:aeroaura/utils/const.dart';
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class NextSevenDays extends StatefulWidget {
-  const NextSevenDays({super.key});
+class NextSevenDaysPage extends StatefulWidget {
+  final Map<String, dynamic> daily;
+  final Map<String, dynamic> daily_units;
+  const NextSevenDaysPage(
+      {super.key, required this.daily, required this.daily_units});
 
   @override
-  State<NextSevenDays> createState() => _NextSevenDaysState();
+  State<NextSevenDaysPage> createState() => _NextSevenDaysPageState();
 }
 
-class _NextSevenDaysState extends State<NextSevenDays> {
+class _NextSevenDaysPageState extends State<NextSevenDaysPage> {
   DateTime now = DateTime.now();
   @override
   Widget build(BuildContext context) {
@@ -119,7 +124,8 @@ class _NextSevenDaysState extends State<NextSevenDays> {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: Colors.lightBlueAccent,
+                                      color: Colors.lightBlueAccent
+                                          .withOpacity(0.5),
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(
                                           color: Colors.black54,
@@ -145,7 +151,8 @@ class _NextSevenDaysState extends State<NextSevenDays> {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: Colors.lightBlueAccent,
+                                      color: Colors.lightBlueAccent
+                                          .withOpacity(0.5),
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(
                                           color: Colors.black54,
@@ -171,7 +178,8 @@ class _NextSevenDaysState extends State<NextSevenDays> {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      color: Colors.lightBlueAccent,
+                                      color: Colors.lightBlueAccent
+                                          .withOpacity(0.5),
                                       borderRadius: BorderRadius.circular(15),
                                       border: Border.all(
                                           color: Colors.black54,
