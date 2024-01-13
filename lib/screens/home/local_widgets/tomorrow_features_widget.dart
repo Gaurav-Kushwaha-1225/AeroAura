@@ -27,10 +27,14 @@ class _TomorrowFeaturesWidgetState extends State<TomorrowFeaturesWidget> {
           child: Container(
             width: (MediaQuery.of(context).size.width - 60) / 2,
             decoration: BoxDecoration(
-              color: Constants.lightTabColor,
+              color: Theme.of(context).brightness == Brightness.dark
+                          ? Constants.darkTabColor
+                          : Constants.lightTabColor,
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                  color: Colors.black12, width: 1.5, style: BorderStyle.solid),
+                  color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white12
+                          : Colors.black12, width: 1.5, style: BorderStyle.solid),
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,12 +49,14 @@ class _TomorrowFeaturesWidgetState extends State<TomorrowFeaturesWidget> {
                   width: 54,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(27),
-                      color: Colors.blue.shade50),
+                      color: Colors.lightBlueAccent.withOpacity(0.5)),
                   child: Icon(
                       widget.SunriseOrSunset == "Sunrise Time"
                           ? CupertinoIcons.sunrise_fill
                           : CupertinoIcons.sunset_fill,
-                      color: Colors.black87,
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white70
+                          : Colors.black87,
                       size: 27),
                 ),
                 const SizedBox(height: 7),

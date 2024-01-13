@@ -20,18 +20,22 @@ class _CloudBGState extends State<CloudBG> {
     return CustomPaint(
         size: widget.size,
         painter: widget.cloudNumber == 1
-            ? CloudPainterOne()
+            ? CloudPainterOne(context)
             : widget.cloudNumber == 2
-                ? CloudPainterTwo()
-                : CloudPainterThree());
+                ? CloudPainterTwo(context)
+                : CloudPainterThree(context));
   }
 }
 
 class CloudPainterOne extends CustomPainter {
+  final BuildContext context;
+  CloudPainterOne(this.context);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Constants.lightSecondary
+      ..color = Theme.of(context).brightness == Brightness.dark
+          ? Constants.darkSecondary
+          : Constants.lightSecondary
       ..style = PaintingStyle.fill;
 
     var cloudPath = Path()
@@ -54,10 +58,14 @@ class CloudPainterOne extends CustomPainter {
 }
 
 class CloudPainterTwo extends CustomPainter {
+  final BuildContext context;
+  CloudPainterTwo(this.context);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Constants.lightSecondary
+      ..color = Theme.of(context).brightness == Brightness.dark
+          ? Constants.darkSecondary
+          : Constants.lightSecondary
       ..style = PaintingStyle.fill;
 
     var cloudPath = Path()
@@ -79,10 +87,14 @@ class CloudPainterTwo extends CustomPainter {
 }
 
 class CloudPainterThree extends CustomPainter {
+  final BuildContext context;
+  CloudPainterThree(this.context);
   @override
   void paint(Canvas canvas, Size size) {
     var paint = Paint()
-      ..color = Constants.lightSecondary
+      ..color = Theme.of(context).brightness == Brightness.dark
+          ? Constants.darkSecondary
+          : Constants.lightSecondary
       ..style = PaintingStyle.fill;
 
     var cloudPath = Path()

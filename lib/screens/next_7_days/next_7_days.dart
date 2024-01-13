@@ -26,7 +26,7 @@ class _NextSevenDaysPageState extends State<NextSevenDaysPage> {
           shrinkWrap: true,
           primary: true,
           physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: 15, top: 15),
+          padding: const EdgeInsets.only(bottom: 5, top: 15),
           itemCount: 6,
           itemBuilder: (context, index) {
             return PerDayWeatherCard(

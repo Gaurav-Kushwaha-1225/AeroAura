@@ -35,9 +35,25 @@ String formatDate(String date) {
 bool isTomorrow(String inputDateString) {
   DateTime inputDate = DateTime.parse(inputDateString);
   DateTime now = DateTime.now();
-  DateTime tomorrow = DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
+  DateTime tomorrow =
+      DateTime(now.year, now.month, now.day).add(const Duration(days: 1));
 
-  return inputDate.year == tomorrow.year && 
-         inputDate.month == tomorrow.month && 
-         inputDate.day == tomorrow.day;
+  return inputDate.year == tomorrow.year &&
+      inputDate.month == tomorrow.month &&
+      inputDate.day == tomorrow.day;
 }
+
+String uvComment(double uv_index) {
+  if (uv_index < 3) {
+    return "Low";
+  } else if (uv_index < 6) {
+    return "Moderate";
+  } else if (uv_index < 8) {
+    return "High";
+  } else if (uv_index < 11) {
+    return "Very High";
+  } else {
+    return "Extreme";
+  }
+}
+

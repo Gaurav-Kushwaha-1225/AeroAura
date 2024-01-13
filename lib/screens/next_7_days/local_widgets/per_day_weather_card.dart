@@ -1,8 +1,7 @@
-import 'package:aeroaura/utils/WMO_CodeToComment.dart';
+import 'package:aeroaura/screens/next_7_days/local_widgets/weather_card_date_day_widget.dart';
+import 'package:aeroaura/screens/next_7_days/local_widgets/weather_card_features_widget.dart';
+import 'package:aeroaura/screens/next_7_days/local_widgets/weather_card_temp_max_min_widget.dart';
 import 'package:aeroaura/utils/consts.dart';
-import 'package:aeroaura/utils/functions.dart';
-// import 'package:aeroaura/utils/functions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PerDayWeatherCard extends StatefulWidget {
@@ -34,163 +33,34 @@ class _PerDayWeatherCardState extends State<PerDayWeatherCard> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
-      margin: const EdgeInsets.only(top: 5, left: 20, right: 20, bottom: 5),
+      margin: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 5),
       decoration: BoxDecoration(
-        color: Constants.lightTabColor,
+        color: Theme.of(context).brightness == Brightness.dark
+                          ? Constants.darkTabColor
+                          : Constants.lightTabColor,
         borderRadius: BorderRadius.circular(30),
+        boxShadow: List.filled(
+              5,
+              BoxShadow(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.1)
+                      : Colors.black.withOpacity(0.1),
+                  blurRadius: 5)),
         border: Border.all(
-            color: Colors.black12, width: 1.5, style: BorderStyle.solid),
+            color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white12
+                          : Colors.black12, width: 1.5, style: BorderStyle.solid),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(isTomorrow(widget.date) ? "Tomorrow" : "",
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold)),
-              Text(formatDate(widget.date),
-                  style: const TextStyle(
-                      fontSize: 15, fontWeight: FontWeight.w500))
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                    gradient: RadialGradient(colors: [
-                      Colors.lightBlueAccent.withOpacity(0.3),
-                      Constants.lightTabColor,
-                    ], focal: Alignment.center,
-    )),
-                child: Image.network(
-                  WMO_CodeToComment.WMO_Code[widget.wmoCode]!["day"]!["image"]!,
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.fill,
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          "${widget.tempMax.round()} / ${widget.tempMin.round()}",
-                          style: const TextStyle(
-                              fontSize: 20,
-                              fontFamily: "Comfortaa",
-                              fontWeight: FontWeight.bold)),
-                      const Text(" °C",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: "Comfortaa",
-                              fontWeight: FontWeight.bold)),
-                    ],
-                  ),
-                  Text(
-                      WMO_CodeToComment
-                          .WMO_Code[widget.wmoCode]!["day"]!["description"]!,
-                      style: const TextStyle(
-                          fontFamily: "Comfortaa",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500))
-                ],
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.lightBlueAccent.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                              color: Colors.black54,
-                              width: 1.5,
-                              style: BorderStyle.solid)),
-                      child: const Icon(
-                        CupertinoIcons.wind_snow,
-                        size: 20,
-                      )),
-                  const SizedBox(height: 5),
-                  Text("${widget.windSpeed.round()}km/h",
-                      style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: "Comfortaa",
-                          fontWeight: FontWeight.bold))
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.lightBlueAccent.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                              color: Colors.black54,
-                              width: 1.5,
-                              style: BorderStyle.solid)),
-                      child: const Icon(
-                        CupertinoIcons.cloud_bolt_rain_fill,
-                        size: 20,
-                      )),
-                  const SizedBox(height: 8),
-                  Text("${widget.rainProb.round()}%",
-                      style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: "Comfortaa",
-                          fontWeight: FontWeight.bold))
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.lightBlueAccent.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                              color: Colors.black54,
-                              width: 1.5,
-                              style: BorderStyle.solid)),
-                      child: const Icon(
-                        CupertinoIcons.sun_haze_fill,
-                        size: 20,
-                      )),
-                  const SizedBox(height: 8),
-                  Text("${widget.uvIndex.round()}%",
-                      style: const TextStyle(
-                          fontSize: 13,
-                          fontFamily: "Comfortaa",
-                          fontWeight: FontWeight.bold))
-                ],
-              ),
-            ],
-          ),
+          WeatherCardDateDayWidget(date: widget.date),
+          WeatherCardTempMaxMinWidget(
+              tempMax: widget.tempMax,
+              tempMin: widget.tempMin,
+              wmoCode: widget.wmoCode),
+          WeatherCardFeaturesWidget(rainProb: widget.rainProb, uvIndex: widget.uvIndex, windSpeed: widget.windSpeed)
         ],
       ),
     );

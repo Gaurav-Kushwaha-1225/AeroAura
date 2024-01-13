@@ -17,16 +17,24 @@ class CurrentWeatherFeaturesWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width - 60,
       padding: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
-          color: Constants.lightTabColor,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? Constants.darkTabColor
+              : Constants.lightTabColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: List.filled(
               2,
               BoxShadow(
-                  color: Colors.blue.shade100,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white24
+                      : Colors.blue.shade100,
                   offset: const Offset(2, 2),
                   blurRadius: 2)),
           border: Border.all(
-              color: Colors.black12, width: 1.5, style: BorderStyle.solid)),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white12
+                  : Colors.black12,
+              width: 1.5,
+              style: BorderStyle.solid)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,

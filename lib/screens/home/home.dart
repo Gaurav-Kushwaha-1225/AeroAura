@@ -133,23 +133,22 @@ class _HomePageState extends State<HomePage> {
                   child: FutureBuilder<Weather>(
                     future: futureWeather,
                     builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                          return HorizontalNavigator(
-                      onPressed: (index) {
-                        setState(() {
-                          widgetIndex = index;
-                        });
-                      },
-                      activeIndex: widgetIndex,
-                      daily: snapshot.data!.daily,
-                      daily_units: snapshot.data!.daily_units,
-                    );
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-                        return const CircularProgressIndicator();
+                      if (snapshot.hasData) {
+                        return HorizontalNavigator(
+                          onPressed: (index) {
+                            setState(() {
+                              widgetIndex = index;
+                            });
+                          },
+                          activeIndex: widgetIndex,
+                          daily: snapshot.data!.daily,
+                          daily_units: snapshot.data!.daily_units,
+                        );
+                      } else if (snapshot.hasError) {
+                        return Text('${snapshot.error}');
+                      }
+                      return const CircularProgressIndicator();
                     },
-                    
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -192,47 +191,40 @@ class _HomePageState extends State<HomePage> {
                               },
                             ),
                           )
-                        : widgetIndex == 1
-                            ? Container(
-                                key: UniqueKey(),
-                                child: FutureBuilder<Weather>(
-                                  future: futureWeather,
-                                  builder: (context, snapshot) {
-                                    if (snapshot.hasData) {
-                                      return Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          TomorrowFeatures(
-                                            daily: snapshot.data!.daily,
-                                          ),
-                                          CurrentWeatherFeatures(
-                                            current: snapshot.data!.current,
-                                            current_units:
-                                                snapshot.data!.current_units,
-                                            hourly: snapshot.data!.hourly,
-                                            hourly_units:
-                                                snapshot.data!.hourly_units,
-                                            daily: snapshot.data!.daily,
-                                            daily_units:
-                                                snapshot.data!.daily_units,
-                                            isToday: false,
-                                          )
-                                        ],
-                                      );
-                                    } else if (snapshot.hasError) {
-                                      return Text('${snapshot.error}');
-                                    }
-                                    return const CircularProgressIndicator();
-                                  },
-                                ),
-                              )
-                            : Container(
-                                key: UniqueKey(),
-                                color: Colors.transparent,
-                              ),
+                        : Container(
+                            key: UniqueKey(),
+                            child: FutureBuilder<Weather>(
+                              future: futureWeather,
+                              builder: (context, snapshot) {
+                                if (snapshot.hasData) {
+                                  return Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      TomorrowFeatures(
+                                        daily: snapshot.data!.daily,
+                                      ),
+                                      CurrentWeatherFeatures(
+                                        current: snapshot.data!.current,
+                                        current_units:
+                                            snapshot.data!.current_units,
+                                        hourly: snapshot.data!.hourly,
+                                        hourly_units:
+                                            snapshot.data!.hourly_units,
+                                        daily: snapshot.data!.daily,
+                                        daily_units: snapshot.data!.daily_units,
+                                        isToday: false,
+                                      )
+                                    ],
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return Text('${snapshot.error}');
+                                }
+                                return const CircularProgressIndicator();
+                              },
+                            ),
+                          ),
                     transitionBuilder:
                         (Widget child, Animation<double> animation) {
                       return FadeTransition(

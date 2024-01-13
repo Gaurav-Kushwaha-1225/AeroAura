@@ -34,10 +34,14 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
           child: Container(
             width: 90,
             decoration: BoxDecoration(
-              color: Constants.lightTabColor,
+              color: Theme.of(context).brightness == Brightness.dark
+                          ? Constants.darkTabColor
+                          : Constants.lightTabColor,
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
-                  color: Colors.black12, width: 1.5, style: BorderStyle.solid),
+                  color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white12
+                          : Colors.black12, width: 1.5, style: BorderStyle.solid),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

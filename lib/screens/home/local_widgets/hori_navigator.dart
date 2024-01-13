@@ -6,8 +6,6 @@ import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../utils/consts.dart';
-
 class HorizontalNavigator extends StatefulWidget {
   final Function(int) onPressed;
   final int activeIndex;
@@ -39,12 +37,14 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                 overlayColor: MaterialStatePropertyAll(Colors.transparent)),
             child: Column(
               children: [
-                const Text(
+                Text(
                   "Today",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black),
                 ),
                 const SizedBox(
                   height: 5,
@@ -53,7 +53,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                   Icons.circle_rounded,
                   size: 8,
                   color: widget.activeIndex == 0
-                      ? Colors.black
+                      ? Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black
                       : Colors.transparent,
                 )
               ],
@@ -67,12 +69,14 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                 overlayColor: MaterialStatePropertyAll(Colors.transparent)),
             child: Column(
               children: [
-                const Text(
+                Text(
                   "Tomorrow",
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.black),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black),
                 ),
                 const SizedBox(
                   height: 5,
@@ -81,7 +85,9 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                   Icons.circle_rounded,
                   size: 8,
                   color: widget.activeIndex == 1
-                      ? Colors.black
+                      ? Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Colors.black
                       : Colors.transparent,
                 )
               ],
@@ -93,17 +99,19 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
             textDirection: TextDirection.rtl,
             child: ElevatedButton.icon(
               onPressed: () {
-                GoRouter.of(context).pushNamed(AeroAuraRoutesNames.nextSevenDaysPage, pathParameters: {
-                  "daily": jsonEncode(widget.daily),
-                  "daily_units": jsonEncode(widget.daily_units)
-                });
+                GoRouter.of(context).pushNamed(
+                    AeroAuraRoutesNames.nextSevenDaysPage,
+                    pathParameters: {
+                      "daily": jsonEncode(widget.daily),
+                      "daily_units": jsonEncode(widget.daily_units)
+                    });
               },
               style: ButtonStyle(
                   overlayColor:
                       const MaterialStatePropertyAll(Colors.transparent),
                   elevation: MaterialStateProperty.all(0),
                   backgroundColor:
-                      MaterialStateProperty.all(Constants.lightPrimary)),
+                      MaterialStateProperty.all(Colors.transparent)),
               icon: const Icon(
                 Icons.arrow_back_ios_rounded,
                 size: 18,
@@ -124,7 +132,7 @@ class _HorizontalNavigatorState extends State<HorizontalNavigator> {
                   Icon(
                     Icons.circle_rounded,
                     size: 8,
-                    color: Colors.transparent,
+                    color: Colors.blue,
                   )
                 ],
               ),
