@@ -36,7 +36,7 @@ class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
       mainAxisSpacing: 10,
       crossAxisSpacing: 10,
       childAspectRatio: 1,
-      padding: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 20),
+      padding: const EdgeInsets.only(top: 15, left: 15, right: 15, bottom: 20),
       children: [
         CurrentWeatherFeaturesWidget(
             feature: "Max Temp",

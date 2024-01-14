@@ -45,13 +45,13 @@ class CurrentWeatherFeaturesWidget extends StatelessWidget {
           ),
           Text(feature,
               style: TextStyle(
-                  fontSize: 15,
+                  fontSize: 13,
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.w700,
                   color: Colors.grey.shade600)),
           Text(value,
               style: const TextStyle(
-                  fontSize: 18,
+                  fontSize: 15,
                   fontFamily: "OpenSans",
                   fontWeight: FontWeight.w600))
         ],
