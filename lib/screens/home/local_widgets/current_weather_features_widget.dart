@@ -22,13 +22,12 @@ class CurrentWeatherFeaturesWidget extends StatelessWidget {
               : Constants.lightTabColor,
           borderRadius: BorderRadius.circular(20),
           boxShadow: List.filled(
-              2,
+              4,
               BoxShadow(
                   color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white24
-                      : Colors.blue.shade100,
-                  offset: const Offset(2, 2),
-                  blurRadius: 2)),
+                      ? Colors.white.withOpacity(0.1)
+                      : Colors.black.withOpacity(0.1),
+                  blurRadius: 4)),
           border: Border.all(
               color: Theme.of(context).brightness == Brightness.dark
                   ? Colors.white12

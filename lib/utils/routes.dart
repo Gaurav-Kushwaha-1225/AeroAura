@@ -21,12 +21,19 @@ class AeroAuraRouter {
         name: AeroAuraRoutesNames.nextSevenDaysPage,
         path: "/nextdays/:daily/:daily_units",
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return MaterialPage(
+          return CustomTransitionPage(
             key: state.pageKey,
             child: NextSevenDaysPage(
               daily: jsonDecode(state.pathParameters['daily']!),
               daily_units: jsonDecode(state.pathParameters['daily_units']!),
             ),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+              return ScaleTransition(
+                  scale: animation,
+                  alignment: Alignment.centerRight,
+                  child: child);
+            },
           );
         },
       ),

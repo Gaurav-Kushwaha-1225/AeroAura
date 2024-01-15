@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  final Widget? addCityButton;
+  final Widget settingButton;
+  const CustomAppBar({Key? key, required this.addCityButton, required this.settingButton}) : super(key: key);
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -24,13 +26,11 @@ class _CustomAppBarState extends State<CustomAppBar> {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
-      leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.sort_rounded,
-            size: 32,
-          )),
-      systemOverlayStyle: SystemUiOverlayStyle.dark,
+      leading: widget.addCityButton,
+      actions: [widget.settingButton],
+      systemOverlayStyle: Theme.of(context).brightness == Brightness.dark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
     );
   }
 }

@@ -5,11 +5,13 @@ import 'package:aeroaura/screens/home/local_widgets/current_weather_features.dar
 import 'package:aeroaura/screens/home/local_widgets/day_date_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/hori_navigator.dart';
 import 'package:aeroaura/screens/home/local_widgets/location_widget.dart';
+import 'package:aeroaura/screens/home/local_widgets/modal_barrier_loader.dart';
 import 'package:aeroaura/screens/home/local_widgets/sunset_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/temperature_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
@@ -25,6 +27,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int widgetIndex = 0;
+  bool isLoaded = false;
   late Future<Weather> futureWeather;
   late Future<Venue> futureLocation;
 
@@ -40,13 +43,32 @@ class _HomePageState extends State<HomePage> {
 
     var weatherService = WeatherService();
     futureWeather = weatherService.fetchWeather();
+
+    await Future.wait([futureLocation, futureWeather]);
+
+    setState(() {
+      isLoaded = true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         // extendBodyBehindAppBar: true,
-        appBar: const CustomAppBar(),
+        appBar: CustomAppBar(
+          addCityButton: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.plus,
+                size: 32,
+              )),
+          settingButton: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.settings_rounded,
+                size: 32,
+              )),
+        ),
         body: SafeArea(
           child: Stack(children: [
             const CloudBG(cloudNumber: 1, size: Size(500, 500)),
@@ -75,10 +97,10 @@ class _HomePageState extends State<HomePage> {
                               snapshot.data!.current["weather_code"].toString(),
                           isDay: snapshot.data!.current["is_day"],
                         );
-                      } else if (snapshot.hasError) {
-                        return Text('${snapshot.error}');
                       }
-                      return const CircularProgressIndicator();
+                      return const SizedBox(
+                        height: 62,
+                      );
                     },
                   )),
                   const SizedBoxInSliver(height: 5, width: 0),
@@ -94,8 +116,10 @@ class _HomePageState extends State<HomePage> {
                               temp_unit: (snapshot
                                       .data!.current_units['temperature_2m'])
                                   .toString());
-                        } 
-                        return const CircularProgressIndicator();
+                        }
+                        return const SizedBox(
+                          height: 125,
+                        );
                       },
                     ),
                   ),
@@ -107,8 +131,10 @@ class _HomePageState extends State<HomePage> {
                           return LocationWidget(
                               city: (snapshot.data!.city).toString(),
                               country: (snapshot.data!.country).toString());
-                        } 
-                        return const CircularProgressIndicator();
+                        }
+                        return const SizedBox(
+                          height: 20,
+                        );
                       },
                     ),
                   ),
@@ -124,8 +150,10 @@ class _HomePageState extends State<HomePage> {
                             sunrise: snapshot.data!.daily['sunrise'][0],
                             sunset: snapshot.data!.daily['sunset'][0],
                           );
-                        } 
-                        return const CircularProgressIndicator();
+                        }
+                        return const SizedBox(
+                          height: 45,
+                        );
                       },
                     ),
                   ),
@@ -145,8 +173,10 @@ class _HomePageState extends State<HomePage> {
                             daily: snapshot.data!.daily,
                             daily_units: snapshot.data!.daily_units,
                           );
-                        } 
-                        return const CircularProgressIndicator();
+                        }
+                        return const SizedBox(
+                          height: 52,
+                        );
                       },
                     ),
                   ),
@@ -185,10 +215,8 @@ class _HomePageState extends State<HomePage> {
                                         )
                                       ],
                                     );
-                                  } else if (snapshot.hasError) {
-                                    return Text('${snapshot.error}');
                                   }
-                                  return const CircularProgressIndicator();
+                                  return const SizedBox();
                                 },
                               ),
                             )
@@ -221,10 +249,8 @@ class _HomePageState extends State<HomePage> {
                                         )
                                       ],
                                     );
-                                  } else if (snapshot.hasError) {
-                                    return Text('${snapshot.error}');
                                   }
-                                  return const CircularProgressIndicator();
+                                  return const SizedBox();
                                 },
                               ),
                             ),
@@ -236,10 +262,11 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                  ),
+                  )
                 ],
               ),
-            )
+            ),
+            !isLoaded ? const Loader() : Container()
           ]),
         ));
   }
