@@ -10,9 +10,11 @@ import 'package:aeroaura/screens/home/local_widgets/sunset_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/temperature_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
+import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
 import '../../services/weather_service.dart';
@@ -55,20 +57,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         // extendBodyBehindAppBar: true,
-        appBar: CustomAppBar(
-          addCityButton: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                CupertinoIcons.plus,
-                size: 32,
-              )),
-          settingButton: IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.settings_rounded,
-                size: 32,
-              )),
-        ),
+        appBar: const CustomAppBar(),
         body: SafeArea(
           child: Stack(children: [
             const CloudBG(cloudNumber: 1, size: Size(500, 500)),
