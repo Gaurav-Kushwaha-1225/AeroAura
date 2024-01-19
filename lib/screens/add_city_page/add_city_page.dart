@@ -1,5 +1,6 @@
 import 'package:aeroaura/screens/add_city_page/local_widgets/add_city_page_widget.dart';
 import 'package:aeroaura/screens/add_city_page/local_widgets/app_bar.dart';
+import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,6 @@ class AddCityPage extends StatefulWidget {
 }
 
 class _AddCityPageState extends State<AddCityPage> {
-  int cnt = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,16 +25,26 @@ class _AddCityPageState extends State<AddCityPage> {
         primary: true,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(bottom: 5, top: 15),
-        itemCount: cnt,
+        itemCount: 1,
         itemBuilder: (context, index) {
           return const AddCityPageWidget();
         },
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          setState(() {
-            cnt++;
-          });
+          showModalBottomSheet<dynamic>(
+            isScrollControlled: true,
+            isDismissible: false,
+            enableDrag: true,
+            elevation: 10,
+            useSafeArea: true,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+            ? Constants.darkPrimary
+            : Constants.lightPrimary,
+              context: context,
+              builder: (BuildContext bc) {
+                return const SearchCityPage();
+              });
         },
         backgroundColor: Theme.of(context).brightness == Brightness.dark
             ? Colors.lightBlue.shade900

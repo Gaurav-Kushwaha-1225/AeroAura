@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, non_constant_identifier_names
 
 import 'package:aeroaura/utils/functions.dart';
-import 'package:aeroaura/utils/WMO_CodeToComment.dart';
+import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:flutter/material.dart';
 
 class SunsetWidget extends StatefulWidget {
@@ -35,9 +35,9 @@ class _SunsetWidgetState extends State<SunsetWidget> {
           children: [
             Text(
               widget.isDay == 1
-                  ? WMO_CodeToComment.WMO_Code[widget.WMOCode.toString()]![
+                  ? WMOCodeToComment.wmoCode[widget.WMOCode.toString()]![
                       "day"]!["description"]!
-                  : WMO_CodeToComment.WMO_Code[widget.WMOCode.toString()]![
+                  : WMOCodeToComment.wmoCode[widget.WMOCode.toString()]![
                       "night"]!["description"]!,
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
             ),

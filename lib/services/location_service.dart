@@ -50,8 +50,8 @@ class LocationService {
         await placemarkFromCoordinates(position.latitude, position.longitude);
 
     Map<String, dynamic> location = Map.from({
-      'city': placemark.first.administrativeArea,
-      'country': placemark.first.country
+      'city': placemark.last.locality,
+      'country': placemark.last.country
     });
     return Venue.fromJson(location);
   }

@@ -1,5 +1,5 @@
-import 'package:aeroaura/utils/WMO_CodeToComment.dart';
 import 'package:aeroaura/utils/consts.dart';
+import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:flutter/material.dart';
 
 class WeatherCardTempMaxMinWidget extends StatelessWidget {
@@ -32,7 +32,7 @@ class WeatherCardTempMaxMinWidget extends StatelessWidget {
             focal: Alignment.center,
           )),
           child: Image.network(
-            WMO_CodeToComment.WMO_Code[wmoCode]!["day"]!["image"]!,
+            WMOCodeToComment.wmoCode[wmoCode]!["day"]!["image"]!,
             height: 100,
             width: 100,
             fit: BoxFit.fill,
@@ -58,7 +58,7 @@ class WeatherCardTempMaxMinWidget extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
               ],
             ),
-            Text(WMO_CodeToComment.WMO_Code[wmoCode]!["day"]!["description"]!,
+            Text(WMOCodeToComment.wmoCode[wmoCode]!["day"]!["description"]!,
                 style: const TextStyle(
                     fontFamily: "Comfortaa",
                     fontSize: 15,

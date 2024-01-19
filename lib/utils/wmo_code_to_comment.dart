@@ -1,7 +1,5 @@
-// ignore_for_file: camel_case_types, file_names, non_constant_identifier_names
-
-class WMO_CodeToComment {
-  static Map<String, Map<String, Map<String, String>>> WMO_Code = {
+class WMOCodeToComment {
+  static Map<String, Map<String, Map<String, String>>> wmoCode = {
     "0": {
       "day": {
         "description": "Sunny",

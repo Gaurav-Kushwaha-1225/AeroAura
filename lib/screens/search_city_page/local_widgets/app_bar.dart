@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,32 +20,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text(
-        "AeroAura Forecast",
+        "Add City",
         style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
       leading: IconButton(
-          onPressed: () {
-            GoRouter.of(context).pushNamed(
-              AeroAuraRoutesNames.addCityPage,
-            );
-          },
+          onPressed: () => context.pop(),
           icon: const Icon(
-            CupertinoIcons.plus,
+            Icons.arrow_back_rounded,
             size: 24,
           )),
-      actions: [
-        IconButton(
-            onPressed: () {
-              GoRouter.of(context).pushNamed(AeroAuraRoutesNames.settingsPage);
-            },
-            icon: const Icon(
-              Icons.settings_rounded,
-              size: 24,
-            )),
-      ],
       systemOverlayStyle: Theme.of(context).brightness == Brightness.dark
           ? SystemUiOverlayStyle.light
           : SystemUiOverlayStyle.dark,

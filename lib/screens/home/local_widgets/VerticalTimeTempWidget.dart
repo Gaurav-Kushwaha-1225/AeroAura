@@ -1,6 +1,6 @@
 // ignore_for_file: file_names, camel_case_types, non_constant_identifier_names
 
-import 'package:aeroaura/utils/WMO_CodeToComment.dart';
+import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/material.dart';
@@ -59,10 +59,10 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
                         color: Colors.lightBlueAccent.withOpacity(0.5)),
                     child: Image.network(
                       widget.isDay == 1
-                          ? WMO_CodeToComment
-                              .WMO_Code[widget.WMOCode]!["day"]!["image"]!
-                          : WMO_CodeToComment
-                              .WMO_Code[widget.WMOCode]!["night"]!["image"]!,
+                          ? WMOCodeToComment
+                              .wmoCode[widget.WMOCode]!["day"]!["image"]!
+                          : WMOCodeToComment
+                              .wmoCode[widget.WMOCode]!["night"]!["image"]!,
                       height: 26,
                       width: 26,
                     ),

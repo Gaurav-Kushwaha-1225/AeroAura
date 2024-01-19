@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:aeroaura/screens/add_city_page/add_city_page.dart';
 import 'package:aeroaura/screens/home/home.dart';
 import 'package:aeroaura/screens/next_7_days/next_7_days.dart';
+import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
 import 'package:aeroaura/screens/settings_page/settings_page.dart';
 import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,26 @@ class AeroAuraRouter {
                   scale: animation,
                   alignment: Alignment.topRight,
                   child: child);
+            },
+          );
+        },
+      ),
+      GoRoute(
+        name: AeroAuraRoutesNames.searchPage,
+        path: "/searchpage",
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: const SearchCityPage(),
+            transitionsBuilder:
+                (context, animation, secondaryAnimation, child) {
+
+              return SlideTransition(position: animation.drive(
+            Tween<Offset>(
+              begin: Offset(0.75, 0),
+              end: Offset.zero,
+            ).chain(CurveTween(curve: Curves.elasticInOut)),
+          ), child: child);
             },
           );
         },
