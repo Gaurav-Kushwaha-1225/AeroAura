@@ -12,6 +12,7 @@ import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
 import '../../services/weather_service.dart';
@@ -29,11 +30,26 @@ class _HomePageState extends State<HomePage> {
   bool isLoaded = false;
   late Future<Weather> futureWeather;
   late Future<Venue> futureLocation;
+  Weather? weather;
+  Venue? location;
+  String? wmoCode;
+  double? temp;
+  double? uvIndex;
+  String? city;
 
   @override
   void initState() {
     super.initState();
+    loadLastValues();
     fetchWeatherLocationData();
+  }
+
+  void loadLastValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    wmoCode = prefs.getString('wmoCode');
+    temp = prefs.getDouble('temp');
+    uvIndex = prefs.getDouble('uvIndex');
+    city = prefs.getString('city');
   }
 
   Future<void> fetchWeatherLocationData() async {
@@ -42,19 +58,47 @@ class _HomePageState extends State<HomePage> {
 
     var weatherService = WeatherService();
     futureWeather = weatherService.fetchWeather();
+    var results = await Future.wait([futureWeather, futureLocation]);
+    Weather weather = results[0] as Weather;
+    Venue location = results[1] as Venue;
 
-    await Future.wait([futureLocation, futureWeather]);
-
+    // Update the UI with the fetched data
     setState(() {
-      isLoaded = true;
+      wmoCode = weather.current["weather_code"].toString();
+      temp = double.parse(weather.current["temperature_2m"].toString());
+      uvIndex = double.parse(weather.hourly["uv_index"][0].toString());
+      city = location.city;
+
+      saveLastValues();
     });
+  }
+
+  void saveLastValues() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('wmoCode', wmoCode!);
+    prefs.setDouble('temp', temp!);
+    prefs.setDouble('uvIndex', uvIndex!);
+    prefs.setString('city', city!);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         // extendBodyBehindAppBar: true,
-        appBar: const CustomAppBar(),
+        appBar:
+            (wmoCode == null || temp == null || uvIndex == null || city == null)
+                ? const CustomAppBar(
+                    wmoCode: "3",
+                    temp: 11.1,
+                    uvIndex: 3.8,
+                    city: "Ayodhya",
+                  )
+                : CustomAppBar(
+                    wmoCode: wmoCode,
+                    temp: temp,
+                    uvIndex: uvIndex,
+                    city: city,
+                  ),
         body: SafeArea(
           child: Stack(children: [
             const CloudBG(cloudNumber: 1, size: Size(500, 500)),
@@ -252,7 +296,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            !isLoaded ? const Loader() : Container()
+            (wmoCode == null || temp == null || uvIndex == null || city == null)
+                ? const Loader()
+                : Container()
           ]),
         ));
   }

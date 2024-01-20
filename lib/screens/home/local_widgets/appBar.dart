@@ -1,5 +1,7 @@
 // ignore_for_file: file_names
 
+import 'dart:convert';
+
 import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +9,16 @@ import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
-  const CustomAppBar({Key? key}) : super(key: key);
+  final double? temp;
+  final String? wmoCode;
+  final String? city;
+  final double? uvIndex;
+  const CustomAppBar(
+      {super.key,
+      required this.city,
+      required this.temp,
+      required this.uvIndex,
+      required this.wmoCode});
 
   @override
   State<CustomAppBar> createState() => _CustomAppBarState();
@@ -29,9 +40,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
       elevation: 0,
       leading: IconButton(
           onPressed: () {
-            GoRouter.of(context).pushNamed(
-              AeroAuraRoutesNames.addCityPage,
-            );
+            GoRouter.of(context)
+                .pushNamed(AeroAuraRoutesNames.addCityPage, pathParameters: {
+              "city": jsonEncode(widget.city),
+              "temp": jsonEncode(widget.temp),
+              "wmoCode": jsonEncode(widget.wmoCode),
+              "uvIndex": jsonEncode(widget.uvIndex)
+            });
           },
           icon: const Icon(
             CupertinoIcons.plus,

@@ -1,10 +1,19 @@
 import 'package:aeroaura/utils/consts.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:aeroaura/utils/functions.dart';
+import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:flutter/material.dart';
 
 class AddCityPageWidget extends StatefulWidget {
-  const AddCityPageWidget({super.key});
-
+  final double temp;
+  final String wmoCode;
+  final String city;
+  final double uvIndex;
+  const AddCityPageWidget(
+      {super.key,
+      required this.city,
+      required this.temp,
+      required this.uvIndex,
+      required this.wmoCode});
   @override
   State<AddCityPageWidget> createState() => _AddCityPageWidgetState();
 }
@@ -34,7 +43,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
             width: 1.5,
             style: BorderStyle.solid),
       ),
-      child: const Column(
+      child:  Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -47,17 +56,17 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "California",
-                    style: TextStyle(
+                    widget.city,
+                    style: const TextStyle(
                         fontFamily: "OpenSans",
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
-                  Text("UV Moderate",
-                      style: TextStyle(
+                  Text("UV ${uvComment(widget.uvIndex)}",
+                      style: const TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 15,
                           fontWeight: FontWeight.w500))
@@ -67,15 +76,16 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("18°",
-                      style: TextStyle(
+                  Text("${widget.temp.round()}°",
+                      style: const TextStyle(
                           fontSize: 20,
                           fontFamily: "Comfortaa",
                           fontWeight: FontWeight.bold)),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
-                  ),Text("Clear",
-                      style: TextStyle(
+                  ),
+                  Text(WMOCodeToComment.wmoCode[widget.wmoCode]!["day"]!["description"]!,
+                      style: const TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 15,
                           fontWeight: FontWeight.w500))

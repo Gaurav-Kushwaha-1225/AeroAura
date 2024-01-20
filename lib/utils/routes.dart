@@ -41,11 +41,16 @@ class AeroAuraRouter {
       ),
       GoRoute(
         name: AeroAuraRoutesNames.addCityPage,
-        path: "/addcitypage",
+        path: "/addcitypage/:city/:temp/:uvIndex/:wmoCode",
         pageBuilder: (BuildContext context, GoRouterState state) {
           return CustomTransitionPage(
             key: state.pageKey,
-            child: const AddCityPage(),
+            child: AddCityPage(
+              city: jsonDecode(state.pathParameters['city']!),
+              temp: jsonDecode(state.pathParameters['temp']!),
+              uvIndex: jsonDecode(state.pathParameters['uvIndex']!),
+              wmoCode: jsonDecode(state.pathParameters['wmoCode']!),
+            ),
             transitionsBuilder:
                 (context, animation, secondaryAnimation, child) {
               return ScaleTransition(
@@ -83,7 +88,7 @@ class AeroAuraRouter {
 
               return SlideTransition(position: animation.drive(
             Tween<Offset>(
-              begin: Offset(0.75, 0),
+              begin: const Offset(0.75, 0),
               end: Offset.zero,
             ).chain(CurveTween(curve: Curves.elasticInOut)),
           ), child: child);

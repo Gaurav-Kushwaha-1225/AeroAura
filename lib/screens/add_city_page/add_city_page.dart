@@ -6,7 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AddCityPage extends StatefulWidget {
-  const AddCityPage({super.key});
+  final double temp;
+  final String wmoCode;
+  final String city;
+  final double uvIndex;
+  const AddCityPage(
+      {super.key,
+      required this.city,
+      required this.temp,
+      required this.uvIndex,
+      required this.wmoCode});
 
   @override
   State<AddCityPage> createState() => _AddCityPageState();
@@ -27,20 +36,24 @@ class _AddCityPageState extends State<AddCityPage> {
         padding: const EdgeInsets.only(bottom: 5, top: 15),
         itemCount: 1,
         itemBuilder: (context, index) {
-          return const AddCityPageWidget();
+          return AddCityPageWidget(
+              city: widget.city,
+              temp: widget.temp,
+              uvIndex: widget.uvIndex,
+              wmoCode: widget.wmoCode);
         },
       )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet<dynamic>(
-            isScrollControlled: true,
-            isDismissible: false,
-            enableDrag: true,
-            elevation: 10,
-            useSafeArea: true,
-            backgroundColor: Theme.of(context).brightness == Brightness.dark
-            ? Constants.darkPrimary
-            : Constants.lightPrimary,
+              isScrollControlled: true,
+              isDismissible: false,
+              enableDrag: true,
+              elevation: 10,
+              useSafeArea: true,
+              backgroundColor: Theme.of(context).brightness == Brightness.dark
+                  ? Constants.darkPrimary
+                  : Constants.lightPrimary,
               context: context,
               builder: (BuildContext bc) {
                 return const SearchCityPage();
