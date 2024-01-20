@@ -43,7 +43,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
             width: 1.5,
             style: BorderStyle.solid),
       ),
-      child:  Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -84,7 +84,9 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(WMOCodeToComment.wmoCode[widget.wmoCode]!["day"]!["description"]!,
+                  Text(
+                      WMOCodeToComment
+                          .wmoCode[widget.wmoCode]!["day"]!["description"]!,
                       style: const TextStyle(
                           fontFamily: "Comfortaa",
                           fontSize: 15,
