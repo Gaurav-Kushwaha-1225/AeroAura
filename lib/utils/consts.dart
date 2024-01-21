@@ -7,7 +7,8 @@ class Constants {
   static Color darkSecondary = const Color.fromARGB(255, 30, 30, 69);
   static Color lightTabColor = const Color.fromARGB(255, 249, 249, 249);
   static Color darkTabColor = const Color.fromARGB(255, 30, 30, 69);
-  // static Color primary_1 = const Color.fromARGB(255, 46, 51, 90);
-  // static Color primary_2 = const Color.fromARGB(255, 28, 27, 51);
-  // static Color gradient_color = const Color.fromARGB(255, 297, 47, 171);
+  static Color navigationBarDark = const Color.fromARGB(255, 24, 8, 59);
+  static Color navigationBarDividerDark = const Color.fromARGB(255, 24, 8, 59);
+  static Color statusBarDark = const Color.fromARGB(255, 12, 4, 32);
+  static Color navigationBarLight = const Color.fromARGB(255, 255, 251, 245);
 }

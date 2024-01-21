@@ -24,6 +24,5 @@ class AeroTheme {
       scaffoldBackgroundColor: Constants.lightPrimary,
       buttonTheme: const ButtonThemeData(
         buttonColor: Colors.transparent,
-
       ));
 }

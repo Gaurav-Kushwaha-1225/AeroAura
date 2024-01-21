@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/routes_consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,24 @@ class _CustomAppBarState extends State<CustomAppBar> {
       centerTitle: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
+      systemOverlayStyle: Theme.of(context).brightness == Brightness.dark
+          ? SystemUiOverlayStyle(
+              systemNavigationBarColor: Constants.navigationBarDark,
+              systemNavigationBarIconBrightness: Brightness.light,
+              systemNavigationBarDividerColor:
+                  Constants.navigationBarDividerDark,
+              statusBarColor: Constants.statusBarDark,
+              statusBarIconBrightness: Brightness.light,
+              statusBarBrightness: Brightness.light,
+            )
+          : SystemUiOverlayStyle(
+              systemNavigationBarColor: Constants.navigationBarLight,
+              systemNavigationBarIconBrightness: Brightness.dark,
+              systemNavigationBarDividerColor: Colors.black26,
+              statusBarColor: Constants.navigationBarLight,
+              statusBarIconBrightness: Brightness.dark,
+              statusBarBrightness: Brightness.dark,
+            ),
       leading: IconButton(
           onPressed: () {
             GoRouter.of(context)
@@ -62,9 +81,6 @@ class _CustomAppBarState extends State<CustomAppBar> {
               size: 24,
             )),
       ],
-      systemOverlayStyle: Theme.of(context).brightness == Brightness.dark
-          ? SystemUiOverlayStyle.light
-          : SystemUiOverlayStyle.dark,
     );
   }
 }
