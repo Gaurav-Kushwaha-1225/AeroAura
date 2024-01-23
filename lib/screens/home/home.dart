@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   double? temp;
   double? uvIndex;
   String? city;
-  bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -67,7 +67,6 @@ class _HomePageState extends State<HomePage> {
       temp = double.parse(weather.current["temperature_2m"].toString());
       uvIndex = double.parse(weather.hourly["uv_index"][0].toString());
       city = location.city;
-      isLoading = false;
 
       saveLastValues();
     });
@@ -299,16 +298,16 @@ class _HomePageState extends State<HomePage> {
             FutureBuilder<Weather>(
               future: futureWeather,
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Loader();
+                if (snapshot.connectionState != ConnectionState.waiting) {
+                  return Container();
                 } else {
                   return FutureBuilder<Venue>(
                     future: futureLocation,
                     builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Loader();
-                      } else {
+                      if (snapshot.connectionState != ConnectionState.waiting) {
                         return Container();
+                      } else {
+                        return const Loader();
                       }
                     },
                   );

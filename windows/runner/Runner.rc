@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "aeroaura" "\0"
+            VALUE "FileDescription", "\Aero Aura" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "aeroaura" "\0"
+            VALUE "InternalName", "\Aero Aura" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
             VALUE "OriginalFilename", "aeroaura.exe" "\0"
-            VALUE "ProductName", "aeroaura" "\0"
+            VALUE "ProductName", "\Aero Aura" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

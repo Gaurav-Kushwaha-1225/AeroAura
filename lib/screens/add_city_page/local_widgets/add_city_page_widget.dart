@@ -35,7 +35,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                 color: Theme.of(context).brightness == Brightness.dark
                     ? Colors.white.withOpacity(0.1)
                     : Colors.black.withOpacity(0.1),
-                blurRadius: 5)),
+                blurRadius: 1)),
         border: Border.all(
             color: Theme.of(context).brightness == Brightness.dark
                 ? Colors.white12

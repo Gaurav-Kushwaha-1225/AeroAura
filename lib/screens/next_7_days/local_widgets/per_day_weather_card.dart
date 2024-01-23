@@ -36,20 +36,22 @@ class _PerDayWeatherCardState extends State<PerDayWeatherCard> {
       margin: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 5),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark
-                          ? Constants.darkTabColor
-                          : Constants.lightTabColor,
+            ? Constants.darkTabColor
+            : Constants.lightTabColor,
         borderRadius: BorderRadius.circular(30),
         boxShadow: List.filled(
-              5,
-              BoxShadow(
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white.withOpacity(0.1)
-                      : Colors.black.withOpacity(0.1),
-                  blurRadius: 5)),
+            5,
+            BoxShadow(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white.withOpacity(0.1)
+                    : Colors.black.withOpacity(0.1),
+                blurRadius: 1)),
         border: Border.all(
             color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white12
-                          : Colors.black12, width: 1.5, style: BorderStyle.solid),
+                ? Colors.white12
+                : Colors.black12,
+            width: 1.5,
+            style: BorderStyle.solid),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +62,10 @@ class _PerDayWeatherCardState extends State<PerDayWeatherCard> {
               tempMax: widget.tempMax,
               tempMin: widget.tempMin,
               wmoCode: widget.wmoCode),
-          WeatherCardFeaturesWidget(rainProb: widget.rainProb, uvIndex: widget.uvIndex, windSpeed: widget.windSpeed)
+          WeatherCardFeaturesWidget(
+              rainProb: widget.rainProb,
+              uvIndex: widget.uvIndex,
+              windSpeed: widget.windSpeed)
         ],
       ),
     );
