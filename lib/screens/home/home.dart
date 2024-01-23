@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:aeroaura/models/location.dart';
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempDisplay.dart';
 import 'package:aeroaura/screens/home/local_widgets/appBar.dart';
@@ -14,7 +12,6 @@ import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
@@ -30,7 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int widgetIndex = 0;
-  bool isLoaded = false;
   late Future<Weather> futureWeather;
   late Future<Venue> futureLocation;
   Weather? weather;
@@ -39,7 +35,7 @@ class _HomePageState extends State<HomePage> {
   double? temp;
   double? uvIndex;
   String? city;
-
+  bool isLoading = true;
   @override
   void initState() {
     super.initState();
@@ -71,6 +67,7 @@ class _HomePageState extends State<HomePage> {
       temp = double.parse(weather.current["temperature_2m"].toString());
       uvIndex = double.parse(weather.hourly["uv_index"][0].toString());
       city = location.city;
+      isLoading = false;
 
       saveLastValues();
     });
@@ -299,9 +296,25 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            (wmoCode == null || temp == null || uvIndex == null || city == null)
-                ? const Loader()
-                : Container()
+            FutureBuilder<Weather>(
+              future: futureWeather,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Loader();
+                } else {
+                  return FutureBuilder<Venue>(
+                    future: futureLocation,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Loader();
+                      } else {
+                        return Container();
+                      }
+                    },
+                  );
+                }
+              },
+            )
           ]),
         ));
   }
