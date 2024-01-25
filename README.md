@@ -62,7 +62,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 ---
 
-### 📷 Screenshots:
+### 📷 Screenshots
 
 | <img src="assets/images/dashboard.png"/>      | <img src="assets/images/nextweek.png"/>      | <img src="assets/images/addcity.png"/>      | <img src="assets/images/searchcity.png"/>      |
 | --------------------------------------------- | -------------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
@@ -88,6 +88,7 @@ This project is licensed under the [MIT License](./LICENSE).
 ### 👨🏻‍💻 Connect with me
 
 <p align="left">
+   
 <a href="https://twitter.com/GauravKush1225" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="GauraKushwaha1225" height="30" width="40" /></a>
 <a href="https://www.linkedin.com/in/gaurav-kushwaha-330a39251/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="gauravkushwaha" height="30" width="40" /></a>
 <a href="https://www.instagram.com/kush.gaurav12/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="kush.gaurav1225" height="30" width="40" /></a>
