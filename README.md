@@ -71,7 +71,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 ---
 
-### ☑️ Current TODOs:
+### ☑️ Current TODOs
 
 - [ ] 🌆 **Choose Your City Option:** Set your location or add other cities to your list.
 - [ ] 🧮 **Flexible Measurement Units:** Customize your measurement system for temperature and more.
