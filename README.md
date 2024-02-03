@@ -78,7 +78,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 - [ ] 🌡️ **Celsius or Fahrenheit:** Pick your preferred temperature unit.
 - [ ] 🕰️ **12-Hour or 24-Hour Time Formats:** Adjust the time display to your liking.
 - [ ] **Theme switcher** (Light and dark mode using a toggle button in settings page.)
-- [ ] **Add Directory Structure to README.md**
+- [X] **~~Add Directory Structure to README.md~~**
 - [ ] **~~Add an App Icon and~~ a Presentation Video for the App.**
 
 ---
