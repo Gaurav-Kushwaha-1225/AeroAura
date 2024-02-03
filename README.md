@@ -83,7 +83,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 ---
 
-## Directory Structure
+### Directory Structure
   
 ```
 |-- lib
