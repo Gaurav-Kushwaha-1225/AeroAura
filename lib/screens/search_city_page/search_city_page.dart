@@ -52,7 +52,7 @@ class _SearchCityPageState extends State<SearchCityPage> {
                       onChanged: searchCity,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20
                   ),
                   Expanded(
