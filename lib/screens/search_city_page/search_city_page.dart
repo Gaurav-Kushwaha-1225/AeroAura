@@ -42,7 +42,7 @@ class _SearchCityPageState extends State<SearchCityPage> {
                     margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                     child: SearchBar(
                       controller: searchController,
-                      hintText: "Search",
+                      hintText: "Search...",
                       hintStyle: MaterialStateProperty.all(const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.w500)),
                       leading: const Padding(
@@ -52,7 +52,8 @@ class _SearchCityPageState extends State<SearchCityPage> {
                       onChanged: searchCity,
                     ),
                   ),
-                  SizedBox(),
+                  SizedBox(
+                  ),
                   Expanded(
                       child: ListView.builder(
                     itemCount: city.length,
