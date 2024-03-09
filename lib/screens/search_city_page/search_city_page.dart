@@ -53,6 +53,7 @@ class _SearchCityPageState extends State<SearchCityPage> {
                     ),
                   ),
                   SizedBox(
+                    height: 20
                   ),
                   Expanded(
                       child: ListView.builder(
