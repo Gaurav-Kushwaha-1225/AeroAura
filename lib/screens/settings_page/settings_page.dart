@@ -1,4 +1,5 @@
 import 'package:aeroaura/screens/settings_page/local_widgets/app_bar.dart';
+import 'package:aeroaura/screens/settings_page/local_widgets/setting_tile.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -15,16 +16,14 @@ class _SettingsPageState extends State<SettingsPage> {
         // extendBodyBehindAppBar: true,
         appBar: const CustomAppBar(),
         body: SafeArea(
-            child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          primary: true,
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: 5, top: 30),
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return Container();
-          },
-        )));
+            child: ListView(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                primary: true,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: 5, top: 15),
+                children: const [
+                  ThemeTile(),
+            ])));
   }
 }

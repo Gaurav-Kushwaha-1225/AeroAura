@@ -43,6 +43,7 @@ dependencies:
   page_transition: ^2.1.0
   shared_preferences: ^2.2.2
   sqflite: ^2.3.2
+  provider: ^6.1.2
   
   
 
