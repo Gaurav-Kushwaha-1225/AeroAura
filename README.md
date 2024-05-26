@@ -57,6 +57,9 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 * [intl](https://pub.dev/packages/intl)
 * [go_router](https://pub.dev/packages/go_router)
 * [page_transition](https://pub.dev/packages/page_transition)
+* [shared_preferences](https://pub.dev/packages/shared_preferences/versions/2.2.2)
+* [sqflite](https://pub.dev/packages/sqflite/versions/2.3.2)
+* [provider](https://pub.dev/packages/provider/versions/6.1.2)
      
 </details>
 
