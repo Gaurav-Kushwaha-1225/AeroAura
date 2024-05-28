@@ -55,12 +55,16 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.city,
-                    style: const TextStyle(
-                        fontFamily: "OpenSans",
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                  SizedBox(
+                    width: 200,
+                    child: Text(
+                      widget.city,
+                      style: const TextStyle(
+                          fontFamily: "OpenSans",
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis),
+                    ),
                   ),
                   const SizedBox(
                     height: 5,

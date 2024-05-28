@@ -1,4 +1,3 @@
-import 'package:aeroaura/screens/settings_page/local_widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +18,7 @@ class _ThemeTileState extends State<ThemeTile> {
         builder: (context, ThemeProvider notifier, child) {
       return Container(
         margin: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 5),
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.dark
               ? Constants.darkTabColor
@@ -43,9 +42,12 @@ class _ThemeTileState extends State<ThemeTile> {
                     fontSize: 20,
                     fontWeight: FontWeight.w600)),
             const Expanded(child: SizedBox()),
-            Switch(
-                value: notifier.isDark,
-                onChanged: (value) => notifier.changeTheme())
+            Transform.scale(
+              scale: 0.8,
+              child: Switch(
+                  value: notifier.isDark,
+                  onChanged: (value) => notifier.changeTheme()),
+            )
           ],
         ),
       );
