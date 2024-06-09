@@ -87,10 +87,10 @@ class _HomePageState extends State<HomePage> {
         appBar:
             (wmoCode == null || temp == null || uvIndex == null || city == null)
                 ? const CustomAppBar(
-                    wmoCode: "3",
-                    temp: 11.1,
-                    uvIndex: 3.8,
-                    city: "Ayodhya",
+                    wmoCode: "0",
+                    temp: 0,
+                    uvIndex: 0,
+                    city: "--",
                   )
                 : CustomAppBar(
                     wmoCode: wmoCode,
