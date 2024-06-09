@@ -44,61 +44,46 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
             style: BorderStyle.solid),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: Text(
-                      widget.city,
-                      style: const TextStyle(
-                          fontFamily: "OpenSans",
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          overflow: TextOverflow.ellipsis),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text("UV ${uvComment(widget.uvIndex)}",
-                      style: const TextStyle(
-                          fontFamily: "Comfortaa",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500))
-                ],
+              Text(
+                widget.city,
+                style: const TextStyle(
+                    fontFamily: "OpenSans",
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text("${widget.temp.round()}°",
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontFamily: "Comfortaa",
-                          fontWeight: FontWeight.bold)),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                      WMOCodeToComment
-                          .wmoCode[widget.wmoCode]!["day"]!["description"]!,
-                      style: const TextStyle(
-                          fontFamily: "Comfortaa",
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500))
-                ],
-              ),
+              Text("UV ${uvComment(widget.uvIndex)}",
+                  style: const TextStyle(
+                      fontFamily: "Comfortaa",
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500))
             ],
-          )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text("${widget.temp.round()}°",
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontFamily: "Comfortaa",
+                      fontWeight: FontWeight.bold)),
+              Text(
+                  WMOCodeToComment
+                      .wmoCode[widget.wmoCode]!["day"]!["description"]!,
+                  style: const TextStyle(
+                      fontFamily: "Comfortaa",
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500))
+            ],
+          ),
         ],
       ),
     );
