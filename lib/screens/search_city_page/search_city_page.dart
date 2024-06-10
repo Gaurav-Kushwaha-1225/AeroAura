@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:aeroaura/screens/search_city_page/local_widgets/app_bar.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SearchCityPage extends StatefulWidget {
+  // final Function onPop;
   const SearchCityPage({super.key});
 
   @override
@@ -13,17 +17,26 @@ class SearchCityPage extends StatefulWidget {
 
 class _SearchCityPageState extends State<SearchCityPage> {
   final TextEditingController searchController = TextEditingController();
-  List<String> city = Constants.cities;
+  Iterable<String> suggestedContent = {};
+  Iterable<String> totalContent = {};
+
+  @override
+  void initState() {
+    Iterable<String> city = Constants.cities.keys;
+    super.initState();
+    suggestedContent = city;
+    totalContent = city;
+  }
 
   void searchCity(String query) {
-    final suggestions = Constants.cities.where((element) {
+    final suggestions = totalContent.where((element) {
       final cityName = element.toLowerCase();
       final input = query.toLowerCase();
 
       return cityName.contains(input);
     }).toList();
     setState(() {
-      city = suggestions;
+      suggestedContent = suggestions;
     });
   }
 
@@ -52,15 +65,39 @@ class _SearchCityPageState extends State<SearchCityPage> {
                       onChanged: searchCity,
                     ),
                   ),
-                  const SizedBox(
-                    height: 20
-                  ),
+                  const SizedBox(height: 20),
                   Expanded(
                       child: ListView.builder(
-                    itemCount: city.length,
+                    itemCount: suggestedContent.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        title: Text(city[index]),
+                        title: GestureDetector(
+                          onTap: () async {
+                            String selectedCity =
+                                suggestedContent.elementAt(index);
+                            log(selectedCity);
+
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+
+                            List<String>? current =
+                                prefs.getStringList('saved_cities');
+
+                            List<String> value;
+                            if (current == null) {
+                              value = [selectedCity];
+                              prefs.setStringList('saved_cities', value);
+                            } else if (!current.contains(selectedCity)) {
+                              current.add(selectedCity);
+                              value = current;
+                              prefs.setStringList('saved_cities', value);
+                            }
+                            return Navigator.pop(context);
+                          },
+                          child: Text(suggestedContent.elementAt(index),
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500)),
+                        ),
                       );
                     },
                   ))

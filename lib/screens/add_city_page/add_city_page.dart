@@ -4,6 +4,7 @@ import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddCityPage extends StatefulWidget {
   final double temp;
@@ -22,6 +23,14 @@ class AddCityPage extends StatefulWidget {
 }
 
 class _AddCityPageState extends State<AddCityPage> {
+  List<String> savedCities = [];
+
+  @override
+  void initState() {
+    getSavedCities();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,29 +45,48 @@ class _AddCityPageState extends State<AddCityPage> {
         padding: const EdgeInsets.only(bottom: 5, top: 15),
         itemCount: 1,
         itemBuilder: (context, index) {
-          return AddCityPageWidget(
-              city: widget.city,
-              temp: widget.temp,
-              uvIndex: widget.uvIndex,
-              wmoCode: widget.wmoCode);
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AddCityPageWidget(
+                  city: widget.city,
+                  temp: widget.temp,
+                  uvIndex: widget.uvIndex,
+                  wmoCode: widget.wmoCode),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                primary: true,
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.only(bottom: 5, top: 15),
+                itemCount: savedCities.length,
+                itemBuilder: (context, index) {
+                  return AddCityPageWidget(
+                      city: savedCities[index].split(',')[0],
+                      temp: 0,
+                      uvIndex: 0,
+                      wmoCode: '0');
+                },
+              )
+            ],
+          );
         },
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet<dynamic>(
-              isScrollControlled: true,
-              isDismissible: false,
-              enableDrag: true,
-              elevation: 10,
-              useSafeArea: true,
-              backgroundColor: Theme.of(context).brightness == Brightness.dark
-                  ? Constants.darkPrimary
-                  : Constants.lightPrimary,
-              context: context,
-              builder: (BuildContext bc) {
-                return const SearchCityPage();
-              });
-        },
+        onPressed: () => showModalBottomSheet<dynamic>(
+            isScrollControlled: true,
+            isDismissible: false,
+            enableDrag: true,
+            elevation: 10,
+            useSafeArea: true,
+            backgroundColor: Theme.of(context).brightness == Brightness.dark
+                ? Constants.darkPrimary
+                : Constants.lightPrimary,
+            context: context,
+            builder: (BuildContext bc) {
+              return const SearchCityPage();
+            }).then((_) => getSavedCities()),
         backgroundColor: Theme.of(context).brightness == Brightness.dark
             ? Colors.lightBlue.shade900
             : Colors.lightBlue.shade50,
@@ -69,5 +97,12 @@ class _AddCityPageState extends State<AddCityPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
+  }
+
+  void getSavedCities() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? cities = prefs.getStringList('saved_cities');
+    savedCities = cities!;
+    setState(() {});
   }
 }
