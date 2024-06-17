@@ -1,10 +1,13 @@
 import 'package:aeroaura/screens/add_city_page/local_widgets/add_city_page_widget.dart';
 import 'package:aeroaura/screens/add_city_page/local_widgets/app_bar.dart';
 import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
+import 'package:aeroaura/services/weather_service.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../models/weather.dart';
 
 class AddCityPage extends StatefulWidget {
   final double temp;
@@ -24,6 +27,7 @@ class AddCityPage extends StatefulWidget {
 
 class _AddCityPageState extends State<AddCityPage> {
   List<String> savedCities = [];
+  List<Weather> weathers = [];
 
   @override
   void initState() {
@@ -62,11 +66,15 @@ class _AddCityPageState extends State<AddCityPage> {
                 padding: const EdgeInsets.only(bottom: 5, top: 15),
                 itemCount: savedCities.length,
                 itemBuilder: (context, index) {
-                  return AddCityPageWidget(
-                      city: savedCities[index].split(',')[0],
-                      temp: 0,
-                      uvIndex: 0,
-                      wmoCode: '0');
+                  final weatherData = weathers[index];
+                  return weatherData != null
+                      ? AddCityPageWidget(
+                          city: savedCities[index].split(',')[0],
+                          temp: weatherData.current["temperature_2m"],
+                          uvIndex: weatherData.hourly["uv_index"][0],
+                          wmoCode:
+                              weatherData.current["weather_code"].toString())
+                      : const Center(child: CircularProgressIndicator());
                 },
               )
             ],
@@ -103,6 +111,16 @@ class _AddCityPageState extends State<AddCityPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? cities = prefs.getStringList('saved_cities');
     savedCities = cities!;
+    weathers = await Future.wait(
+        savedCities.map((cityData) => _fetchWeatherForCity(cityData)).toList());
     setState(() {});
+  }
+
+  Future<Weather> _fetchWeatherForCity(String cityData) async {
+    double? latitude = Constants.cities[cityData]?["latitude"];
+    double? longitude = Constants.cities[cityData]?["longitude"];
+
+    return await WeatherService()
+        .fetchWeather(latitude: latitude, longitude: longitude);
   }
 }
