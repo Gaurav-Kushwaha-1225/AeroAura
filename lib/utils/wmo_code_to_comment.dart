@@ -92,11 +92,11 @@ class WMOCodeToComment {
     },
     "56": {
       "day": {
-        "description": "Light Freezing Drizzle",
+        "description": "Light Freezing \nDrizzle",
         "image": "http://openweathermap.org/img/wn/09d@2x.png"
       },
       "night": {
-        "description": "Light Freezing Drizzle",
+        "description": "Light Freezing \nDrizzle",
         "image": "http://openweathermap.org/img/wn/09n@2x.png"
       }
     },
@@ -142,11 +142,11 @@ class WMOCodeToComment {
     },
     "66": {
       "day": {
-        "description": "Light Freezing Rain",
+        "description": "Light \nFreezing Rain",
         "image": "http://openweathermap.org/img/wn/10d@2x.png"
       },
       "night": {
-        "description": "Light Freezing Rain",
+        "description": "Light \nFreezing Rain",
         "image": "http://openweathermap.org/img/wn/10n@2x.png"
       }
     },
@@ -232,11 +232,11 @@ class WMOCodeToComment {
     },
     "85": {
       "day": {
-        "description": "Light Snow Showers",
+        "description": "Light Snow \nShowers",
         "image": "http://openweathermap.org/img/wn/13d@2x.png"
       },
       "night": {
-        "description": "Light Snow Showers",
+        "description": "Light Snow \nShowers",
         "image": "http://openweathermap.org/img/wn/13n@2x.png"
       }
     },
@@ -262,21 +262,21 @@ class WMOCodeToComment {
     },
     "96": {
       "day": {
-        "description": "Light Thunderstorms With Hail",
+        "description": "Light Thunderstorm \nWith Hail",
         "image": "http://openweathermap.org/img/wn/11d@2x.png"
       },
       "night": {
-        "description": "Light Thunderstorms With Hail",
+        "description": "Light Thunderstorm \nWith Hail",
         "image": "http://openweathermap.org/img/wn/11n@2x.png"
       }
     },
     "99": {
       "day": {
-        "description": "Thunderstorm With Hail",
+        "description": "Thunderstorm \nWith Hail",
         "image": "http://openweathermap.org/img/wn/11d@2x.png"
       },
       "night": {
-        "description": "Thunderstorm With Hail",
+        "description": "Thunderstorm \nWith Hail",
         "image": "http://openweathermap.org/img/wn/11n@2x.png"
       }
     }

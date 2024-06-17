@@ -78,6 +78,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
               Text(
                   WMOCodeToComment
                       .wmoCode[widget.wmoCode]!["day"]!["description"]!,
+                  textAlign: TextAlign.right,
                   style: const TextStyle(
                       fontFamily: "Comfortaa",
                       fontSize: 15,
