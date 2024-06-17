@@ -12,6 +12,7 @@ import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/weather.dart';
 import '../../services/location_service.dart';
@@ -27,6 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int widgetIndex = 0;
+  late Future<Position> futurePosition;
   late Future<Weather> futureWeather;
   late Future<Venue> futureLocation;
   Weather? weather;
@@ -56,7 +58,10 @@ class _HomePageState extends State<HomePage> {
     futureLocation = locationService.GetLocation();
 
     var weatherService = WeatherService();
-    futureWeather = weatherService.fetchWeather();
+    futurePosition = weatherService.fetchPosition();
+    var position = await Future.wait([futurePosition]);
+    Position pos = position[0] as Position;
+    futureWeather = weatherService.fetchWeather(pos.longitude, pos.longitude);
     var results = await Future.wait([futureWeather, futureLocation]);
     Weather weather = results[0] as Weather;
     Venue location = results[1] as Venue;
@@ -307,7 +312,16 @@ class _HomePageState extends State<HomePage> {
                       if (snapshot.connectionState != ConnectionState.waiting) {
                         return Container();
                       } else {
-                        return const Loader();
+                        return FutureBuilder<Position>(
+                          future: futurePosition,
+                          builder: (context, snapshot) {
+                            if(snapshot.connectionState != ConnectionState.waiting) {
+                              return Container();
+                            } else {
+                              return const Loader();
+                            }
+                          },
+                        );
                       }
                     },
                   );
