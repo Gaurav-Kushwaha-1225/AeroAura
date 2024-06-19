@@ -1,5 +1,5 @@
 <div align="center">
-   <img width="250" height="250" src="assets/images/circular_banner.png"/>
+   <img width="250" height="250" src="readme_assets/circular_banner.png"/>
    <h1>Aero Aura - Unleash the Weather</h1>
 </div>
 <div align="center">
@@ -41,7 +41,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 ### 🏞️ Display Banner
 
 <div align="center">
-  <img src="assets/images/Figma Community.png" width="800"/>
+  <img src="readme_assets/Figma Community.png" width="800"/>
 </div>
 
 ---
@@ -67,10 +67,10 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 ### 📷 Screenshots
 
-| <img src="assets/images/dashboard.png"/>      | <img src="assets/images/nextweek.png"/>      | <img src="assets/images/addcity.png"/>      | <img src="assets/images/searchcity.png"/>      |
+| <img src="readme_assets/dashboard.png"/>      | <img src="readme_assets/nextweek.png"/>      | <img src="readme_assets/addcity.png"/>      | <img src="readme_assets/searchcity.png"/>      |
 | --------------------------------------------- | -------------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
-| <img src="assets/images/dashboard_dark.png"/> | <img src="assets/images/nextweek_dark.png"/> | <img src="assets/images/addcity_dark.png"/> | <img src="assets/images/searchcity_dark.png"/> |
-| <img src="assets/images/setting.png"/>        | <img src="assets/images/setting_dark.png"/>  | <img src="assets/images/splash.png"/>       |
+| <img src="readme_assets/dashboard_dark.png"/> | <img src="readme_assets/nextweek_dark.png"/> | <img src="readme_assets/addcity_dark.png"/> | <img src="readme_assets/searchcity_dark.png"/> |
+| <img src="readme_assets/setting.png"/>        | <img src="readme_assets/setting_dark.png"/>  | <img src="readme_assets/splash.png"/>       |
 
 ---
 
