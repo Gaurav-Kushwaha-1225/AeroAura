@@ -51,13 +51,19 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                widget.city,
-                style: const TextStyle(
-                    fontFamily: "OpenSans",
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    overflow: TextOverflow.ellipsis),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 2.5,
+                child: Text(
+                  widget.city,
+                  overflow: TextOverflow.fade,
+                  maxLines: 1,
+                  softWrap: false,
+                  style: const TextStyle(
+                      fontFamily: "OpenSans",
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis),
+                ),
               ),
               Text(widget.uvIndex == -1 ? "N/A" :"UV ${uvComment(widget.uvIndex)}",
                   style: const TextStyle(
