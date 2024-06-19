@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:aeroaura/models/location.dart';
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempDisplay.dart';

@@ -1,13 +1,17 @@
+import 'dart:math';
+
 import 'package:aeroaura/screens/add_city_page/local_widgets/add_city_page_widget.dart';
 import 'package:aeroaura/screens/add_city_page/local_widgets/app_bar.dart';
 import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
 import 'package:aeroaura/services/weather_service.dart';
 import 'package:aeroaura/utils/consts.dart';
+import 'package:country_state_city/models/city.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/weather.dart';
+import '../../utils/functions.dart';
 
 class AddCityPage extends StatefulWidget {
   final double temp;
@@ -69,7 +73,7 @@ class _AddCityPageState extends State<AddCityPage> {
                   final weatherData = weathers[index];
                   return weatherData != null
                       ? AddCityPageWidget(
-                          city: savedCities[index].split(',')[0],
+                          city: savedCities[index].split(', ')[0],
                           temp: weatherData.current["temperature_2m"],
                           uvIndex: weatherData.hourly["uv_index"][0],
                           wmoCode:
@@ -117,8 +121,8 @@ class _AddCityPageState extends State<AddCityPage> {
   }
 
   Future<Weather> _fetchWeatherForCity(String cityData) async {
-    double? latitude = Constants.cities[cityData]?["latitude"];
-    double? longitude = Constants.cities[cityData]?["longitude"];
+    double? latitude = double.parse(cityData.split(', ')[1]);
+    double? longitude = double.parse(cityData.split(', ')[2]);
 
     return await WeatherService()
         .fetchWeather(latitude: latitude, longitude: longitude);

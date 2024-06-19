@@ -1,5 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
-
+import 'package:country_state_city/country_state_city.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
@@ -57,3 +57,9 @@ String uvComment(double uv_index) {
   }
 }
 
+Future<List<City>> getCities() async {
+  // Get all cities
+  final cities = await getAllCities();
+
+  return cities;
+}

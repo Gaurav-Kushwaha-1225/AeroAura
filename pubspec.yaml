@@ -44,7 +44,7 @@ dependencies:
   shared_preferences: ^2.2.2
   sqflite: ^2.3.2
   provider: ^6.1.2
-  
+  country_state_city: ^0.1.6
   
 
 dev_dependencies:
