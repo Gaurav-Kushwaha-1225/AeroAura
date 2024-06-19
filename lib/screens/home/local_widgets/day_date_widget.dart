@@ -4,6 +4,8 @@ import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/consts.dart';
+
 class DayDateWidget extends StatefulWidget {
   final String WMOCode;
   final int isDay;
@@ -22,12 +24,26 @@ class _DayDateWidgetState extends State<DayDateWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
       children: [
-        Image.network(
-          widget.isDay == 1
-              ? WMOCodeToComment.wmoCode[widget.WMOCode]!["day"]!["image"]!
-              : WMOCodeToComment.wmoCode[widget.WMOCode]!["night"]!["image"]!,
-          height: 62,
-          width: 62,
+        Container(
+          decoration: BoxDecoration(
+              gradient: RadialGradient(
+                colors: [
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white.withOpacity(0.1)
+                      : Colors.black.withOpacity(0.1),
+                  Theme.of(context).brightness == Brightness.dark
+                      ? Constants.darkPrimary.withAlpha(100)
+                      : Constants.lightPrimary.withAlpha(80),
+                ],
+                focal: Alignment.center,
+              )),
+          child: Image.network(
+            widget.isDay == 1
+                ? WMOCodeToComment.wmoCode[widget.WMOCode]!["day"]!["image"]!
+                : WMOCodeToComment.wmoCode[widget.WMOCode]!["night"]!["image"]!,
+            height: 62,
+            width: 62,
+          ),
         ),
         const SizedBox(
           width: 12,
