@@ -1,5 +1,15 @@
 class WMOCodeToComment {
   static Map<String, Map<String, Map<String, String>>> wmoCode = {
+    "-1": {
+      "day": {
+        "description": "N/A",
+        "image": ""
+      },
+      "night": {
+        "description": "N/A",
+        "image": ""
+      }
+    },
     "0": {
       "day": {
         "description": "Sunny",

@@ -59,7 +59,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                     fontWeight: FontWeight.bold,
                     overflow: TextOverflow.ellipsis),
               ),
-              Text("UV ${uvComment(widget.uvIndex)}",
+              Text(widget.uvIndex == -1 ? "N/A" :"UV ${uvComment(widget.uvIndex)}",
                   style: const TextStyle(
                       fontFamily: "Comfortaa",
                       fontSize: 15,
@@ -70,7 +70,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("${widget.temp.round()}°",
+              Text("${widget.temp == -273 ? "N/A" : widget.temp.round()}°",
                   style: const TextStyle(
                       fontSize: 20,
                       fontFamily: "Comfortaa",

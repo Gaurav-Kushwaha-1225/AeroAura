@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:aeroaura/models/location.dart';
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempDisplay.dart';
 import 'package:aeroaura/screens/home/local_widgets/appBar.dart';
@@ -35,12 +37,14 @@ class _HomePageState extends State<HomePage> {
   double? temp;
   double? uvIndex;
   String? city;
+  String? country;
 
   @override
   void initState() {
     super.initState();
     loadLastValues();
     fetchWeatherLocationData();
+    setState(() {});
   }
 
   void loadLastValues() async {
@@ -49,6 +53,7 @@ class _HomePageState extends State<HomePage> {
     temp = prefs.getDouble('temp');
     uvIndex = prefs.getDouble('uvIndex');
     city = prefs.getString('city');
+    country = prefs.getString('country');
   }
 
   Future<void> fetchWeatherLocationData() async {
@@ -68,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       temp = double.parse(weather.current["temperature_2m"].toString());
       uvIndex = double.parse(weather.hourly["uv_index"][0].toString());
       city = location.city;
+      country = location.country;
 
       saveLastValues();
     });
@@ -79,6 +85,7 @@ class _HomePageState extends State<HomePage> {
     prefs.setDouble('temp', temp!);
     prefs.setDouble('uvIndex', uvIndex!);
     prefs.setString('city', city!);
+    prefs.setString('country', country!);
   }
 
   @override
@@ -88,10 +95,10 @@ class _HomePageState extends State<HomePage> {
         appBar:
             (wmoCode == null || temp == null || uvIndex == null || city == null)
                 ? const CustomAppBar(
-                    wmoCode: "0",
-                    temp: 0,
-                    uvIndex: 0,
-                    city: "--",
+                    wmoCode: "-1",
+                    temp: -273,
+                    uvIndex: -1,
+                    city: "Current City",
                   )
                 : CustomAppBar(
                     wmoCode: wmoCode,
