@@ -62,6 +62,7 @@ class _PerDayWeatherCardState extends State<PerDayWeatherCard> {
               tempMax: widget.tempMax,
               tempMin: widget.tempMin,
               wmoCode: widget.wmoCode),
+          const SizedBox(height: 12,),
           WeatherCardFeaturesWidget(
               rainProb: widget.rainProb,
               uvIndex: widget.uvIndex,

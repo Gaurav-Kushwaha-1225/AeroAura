@@ -26,8 +26,8 @@ class WeatherCardTempMaxMinWidget extends StatelessWidget {
                   ? Colors.white.withOpacity(0.1)
                   : Colors.black.withOpacity(0.1),
               Theme.of(context).brightness == Brightness.dark
-                  ? Constants.darkTabColor
-                  : Constants.lightTabColor,
+                  ? Constants.darkTabColor.withAlpha(80)
+                  : Constants.lightTabColor.withAlpha(80),
             ],
             focal: Alignment.center,
           )),
