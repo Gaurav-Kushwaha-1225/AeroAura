@@ -72,7 +72,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 | <img src="readme_assets/dashboard.png"/>      | <img src="readme_assets/nextweek.png"/>      | <img src="readme_assets/addcity.png"/>      | <img src="readme_assets/searchcity.png"/>      |
 | --------------------------------------------- | -------------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
 | <img src="readme_assets/dashboard_dark.png"/> | <img src="readme_assets/nextweek_dark.png"/> | <img src="readme_assets/addcity_dark.png"/> | <img src="readme_assets/searchcity_dark.png"/> |
-| <img src="readme_assets/setting.png"/>        | <img src="readme_assets/setting_dark.png"/>  | <img src="readme_assets/nextweek.png"/>       | <img src="readme_assets/nextweek_dark.png"/>        |
+| <img src="readme_assets/setting.png"/>        | <img src="readme_assets/setting_dark.png"/>  | <img src="readme_assets/internetcheck.png"/>       | <img src="readme_assets/internetcheck_dark.png"/>        |
 | <img src="readme_assets/splash.png"/>        |
 
 ---
