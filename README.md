@@ -60,6 +60,8 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 * [shared_preferences](https://pub.dev/packages/shared_preferences/versions/2.2.2)
 * [sqflite](https://pub.dev/packages/sqflite/versions/2.3.2)
 * [provider](https://pub.dev/packages/provider/versions/6.1.2)
+* [country_state_city](https://pub.dev/packages/country_state_city/versions/0.1.6)
+* [connectivity_plus](https://pub.dev/packages/connectivity_plus/versions/3.0.3)
      
 </details>
 
@@ -70,13 +72,14 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 | <img src="readme_assets/dashboard.png"/>      | <img src="readme_assets/nextweek.png"/>      | <img src="readme_assets/addcity.png"/>      | <img src="readme_assets/searchcity.png"/>      |
 | --------------------------------------------- | -------------------------------------------- | ------------------------------------------- | ---------------------------------------------- |
 | <img src="readme_assets/dashboard_dark.png"/> | <img src="readme_assets/nextweek_dark.png"/> | <img src="readme_assets/addcity_dark.png"/> | <img src="readme_assets/searchcity_dark.png"/> |
-| <img src="readme_assets/setting.png"/>        | <img src="readme_assets/setting_dark.png"/>  | <img src="readme_assets/splash.png"/>       |
+| <img src="readme_assets/setting.png"/>        | <img src="readme_assets/setting_dark.png"/>  | <img src="readme_assets/nextweek.png"/>       | <img src="readme_assets/nextweek_dark.png"/>        |
+| <img src="readme_assets/splash.png"/>        |
 
 ---
 
 ### ☑️ Current TODOs
 
-- [ ] 🌆 **Choose Your City Option:** Set your location or add other cities to your list.
+- [X] 🌆 **~~Choose Your City Option:** ~~(Set your location or add other cities to your list.)~~
 - [ ] 🧮 **Flexible Measurement Units:** Customize your measurement system for temperature and more.
 - [ ] 🌡️ **Celsius or Fahrenheit:** Pick your preferred temperature unit.
 - [ ] 🕰️ **12-Hour or 24-Hour Time Formats:** Adjust the time display to your liking.
