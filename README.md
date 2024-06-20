@@ -79,7 +79,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 ### ☑️ Current TODOs
 
-- [X] 🌆 **~~Choose Your City Option:** ~~(Set your location or add other cities to your list.)~~
+- [X] 🌆 **~~Choose Your City Option:~~** ~~(Set your location or add other cities to your list.)~~
 - [ ] 🧮 **Flexible Measurement Units:** Customize your measurement system for temperature and more.
 - [ ] 🌡️ **Celsius or Fahrenheit:** Pick your preferred temperature unit.
 - [ ] 🕰️ **12-Hour or 24-Hour Time Formats:** Adjust the time display to your liking.
