@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:aeroaura/models/location.dart';
 import 'package:aeroaura/screens/home/local_widgets/VerticalTimeTempDisplay.dart';
 import 'package:aeroaura/screens/home/local_widgets/appBar.dart';
@@ -12,6 +14,7 @@ import 'package:aeroaura/screens/home/local_widgets/temperature_widget.dart';
 import 'package:aeroaura/screens/home/local_widgets/tomorrow_features.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/widgets/SizedBoxInSliver.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../models/weather.dart';
@@ -41,10 +44,36 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    checkInternet();
+    startStreaming();
     loadLastValues();
     fetchWeatherLocationData();
     setState(() {});
   }
+
+  // Internet Connection Checker :---
+  late ConnectivityResult result;
+  late StreamSubscription subscription;
+  var isDeviceConnected = false;
+
+  checkInternet() async {
+    result = await Connectivity().checkConnectivity();
+    if (result != ConnectivityResult.none) {
+      isDeviceConnected = true;
+      fetchWeatherLocationData();
+    } else {
+      isDeviceConnected = false;
+      showDialogBox();
+    }
+    setState(() {});
+  }
+
+  startStreaming() {
+    subscription = Connectivity().onConnectivityChanged.listen((event) async {
+      checkInternet();
+    });
+  }
+  // :---
 
   void loadLastValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -324,4 +353,47 @@ class _HomePageState extends State<HomePage> {
           ]),
         ));
   }
+
+  // Internet error Dialog Box
+  showDialogBox() {
+     return showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: const Text(
+            "No Internet Connection",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+            "Turn on mobile data or connect to Wi-Fi.",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            textAlign: TextAlign.left,
+          ),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(25)),
+          backgroundColor: Theme.of(context).brightness == Brightness.dark
+              ? Constants.darkPrimary
+              : Constants.lightTabColor,
+          actionsAlignment: MainAxisAlignment.center,
+          actions: <Widget>[
+            ElevatedButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  checkInternet();
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).brightness == Brightness.dark
+                        ? Constants.darkSecondary
+                        : Constants.lightSecondary,
+                    // foregroundColor: Colors.white,
+                    elevation: 10,
+                    textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    fixedSize: const Size(250, 50)),
+                child: const Text("Try Again"))
+          ],
+        ));
+  }
+// :---
 }
