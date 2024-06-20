@@ -32,6 +32,11 @@ With Aero Aura, you can explore the weather in your city and beyond. We offer an
 
 This application has an aesthetically pleasing design.
 
+Download the from here:
+- [app-arm64-v8a-release](readme_assets/app-arm64-v8a-release.apk)
+- [app-armeabi-v7a-release](readme_assets/app-armeabi-v7a-release.apk)
+- [app-x86_64-release](readme_assets/app-x86_64-release.apk)
+
 ### 🌐 Reliable Data Sources
 
 We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use [Open-Meteo's Geocoding API](https://open-meteo.com/en/docs/geocoding-api) to help you find cities easily.
