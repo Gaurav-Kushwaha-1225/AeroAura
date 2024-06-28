@@ -32,7 +32,7 @@ With Aero Aura, you can explore the weather in your city and beyond. We offer an
 
 This application has an aesthetically pleasing design.
 
-#### <img width="30" src="https://logolook.net/wp-content/uploads/2021/07/Android-Emblem.png"/> Download the .apk from here:
+### <img width="35" src="https://logolook.net/wp-content/uploads/2021/07/Android-Emblem.png"/> Download the .apk from here:
 - [app-arm64-v8a-release](readme_assets/app-arm64-v8a-release.apk)
 - [app-armeabi-v7a-release](readme_assets/app-armeabi-v7a-release.apk)
 - [app-x86_64-release](readme_assets/app-x86_64-release.apk)

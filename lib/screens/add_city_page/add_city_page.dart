@@ -80,6 +80,9 @@ class _AddCityPageState extends State<AddCityPage> {
                               weatherData.current["weather_code"].toString())
                       : const Center(child: CircularProgressIndicator());
                 },
+              ),
+              const SizedBox(
+                height: 70,
               )
             ],
           );
