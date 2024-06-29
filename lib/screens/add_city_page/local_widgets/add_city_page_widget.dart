@@ -22,7 +22,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 5),
+      margin: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.dark

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:aeroaura/screens/add_city_page/local_widgets/add_city_page_widget.dart';
 import 'package:aeroaura/screens/add_city_page/local_widgets/app_bar.dart';
+import 'package:aeroaura/screens/add_city_page/local_widgets/delete_city_dialog.dart';
 import 'package:aeroaura/screens/search_city_page/search_city_page.dart';
 import 'package:aeroaura/services/weather_service.dart';
 import 'package:aeroaura/utils/consts.dart';
@@ -72,12 +73,25 @@ class _AddCityPageState extends State<AddCityPage> {
                 itemBuilder: (context, index) {
                   final weatherData = weathers[index];
                   return weatherData != null
-                      ? AddCityPageWidget(
-                          city: savedCities[index].split(', ')[0],
-                          temp: weatherData.current["temperature_2m"],
-                          uvIndex: weatherData.hourly["uv_index"][0],
-                          wmoCode:
-                              weatherData.current["weather_code"].toString())
+                      ? InkWell(
+                          onLongPress: () {
+                            showDialog(
+                                    context: context,
+                                    builder: (ctx) => DeleteCityDialog(
+                                        city: savedCities[index]))
+                                .then((value) => getSavedCities());
+                          },
+                          splashColor:
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Constants.lightTabColor.withOpacity(0.1)
+                                  : Constants.darkTabColor.withOpacity(0.1),
+                          child: AddCityPageWidget(
+                              city: savedCities[index].split(', ')[0],
+                              temp: weatherData.current["temperature_2m"],
+                              uvIndex: weatherData.hourly["uv_index"][0],
+                              wmoCode: weatherData.current["weather_code"]
+                                  .toString()),
+                        )
                       : const Center(child: CircularProgressIndicator());
                 },
               ),
