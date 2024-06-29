@@ -22,27 +22,7 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 10, left: 20, right: 20, bottom: 10),
       padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Constants.darkTabColor
-            : Constants.lightTabColor,
-        borderRadius: BorderRadius.circular(30),
-        boxShadow: List.filled(
-            5,
-            BoxShadow(
-                color: Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white.withOpacity(0.1)
-                    : Colors.black.withOpacity(0.1),
-                blurRadius: 1)),
-        border: Border.all(
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white12
-                : Colors.black12,
-            width: 1.5,
-            style: BorderStyle.solid),
-      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

@@ -58,11 +58,29 @@ class _AddCityPageState extends State<AddCityPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AddCityPageWidget(
-                  city: widget.city,
-                  temp: widget.temp,
-                  uvIndex: widget.uvIndex,
-                  wmoCode: widget.wmoCode),
+              Container(
+                margin: const EdgeInsets.only(
+                    top: 10, left: 20, right: 20, bottom: 10),
+                child: Material(
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Constants.darkTabColor
+                      : Constants.lightTabColor,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                      side: BorderSide(
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white12
+                              : Colors.black12,
+                          width: 1.5,
+                          style: BorderStyle.solid)),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: AddCityPageWidget(
+                      city: widget.city,
+                      temp: widget.temp,
+                      uvIndex: widget.uvIndex,
+                      wmoCode: widget.wmoCode),
+                ),
+              ),
               ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
@@ -73,24 +91,45 @@ class _AddCityPageState extends State<AddCityPage> {
                 itemBuilder: (context, index) {
                   final weatherData = weathers[index];
                   return weatherData != null
-                      ? InkWell(
-                          onLongPress: () {
-                            showDialog(
-                                    context: context,
-                                    builder: (ctx) => DeleteCityDialog(
-                                        city: savedCities[index]))
-                                .then((value) => getSavedCities());
-                          },
-                          splashColor:
-                              Theme.of(context).brightness == Brightness.dark
+                      ? Container(
+                          padding: const EdgeInsets.only(
+                              top: 10, left: 20, right: 20, bottom: 10),
+                          child: Material(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Constants.darkTabColor
+                                    : Constants.lightTabColor,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                                side: BorderSide(
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? Colors.white12
+                                        : Colors.black12,
+                                    width: 1.5,
+                                    style: BorderStyle.solid)),
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            elevation: 5,
+                            child: InkWell(
+                              onLongPress: () {
+                                showDialog(
+                                        context: context,
+                                        builder: (ctx) => DeleteCityDialog(
+                                            city: savedCities[index]))
+                                    .then((value) => getSavedCities());
+                              },
+                              splashColor: Theme.of(context).brightness ==
+                                      Brightness.dark
                                   ? Constants.lightTabColor.withOpacity(0.1)
                                   : Constants.darkTabColor.withOpacity(0.1),
-                          child: AddCityPageWidget(
-                              city: savedCities[index].split(', ')[0],
-                              temp: weatherData.current["temperature_2m"],
-                              uvIndex: weatherData.hourly["uv_index"][0],
-                              wmoCode: weatherData.current["weather_code"]
-                                  .toString()),
+                              child: AddCityPageWidget(
+                                  city: savedCities[index].split(', ')[0],
+                                  temp: weatherData.current["temperature_2m"],
+                                  uvIndex: weatherData.hourly["uv_index"][0],
+                                  wmoCode: weatherData.current["weather_code"]
+                                      .toString()),
+                            ),
+                          ),
                         )
                       : const Center(child: CircularProgressIndicator());
                 },
