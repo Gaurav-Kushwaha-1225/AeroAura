@@ -3,6 +3,9 @@
 import 'package:aeroaura/utils/functions.dart';
 import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../settings_page/provider/settings_provider.dart';
 
 class SunsetWidget extends StatefulWidget {
   final int WMOCode;
@@ -24,6 +27,7 @@ class SunsetWidget extends StatefulWidget {
 class _SunsetWidgetState extends State<SunsetWidget> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SettingsProvider>(context);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -53,8 +57,8 @@ class _SunsetWidgetState extends State<SunsetWidget> {
             ),
             Text(
               widget.isDay == 1
-                  ? "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}"
-                  : "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}",
+                  ? "Sunset ${provider.is24HrFormat ? ConvertTimeTo24HrFormat(widget.sunset) : ConvertTimeTo12HrFormat(widget.sunset)}"
+                  : "Sunrise ${provider.is24HrFormat ? ConvertTimeTo24HrFormat(widget.sunrise) : ConvertTimeTo12HrFormat(widget.sunrise)}",
               style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
             ),
           ],
@@ -64,8 +68,8 @@ class _SunsetWidgetState extends State<SunsetWidget> {
         ),
         Text(
           widget.isDay == 1
-              ? "Sunrise ${ConvertTimeTo12HrFormat(widget.sunrise)}"
-              : "Sunset ${ConvertTimeTo12HrFormat(widget.sunset)}",
+              ? "Sunrise ${provider.is24HrFormat ? ConvertTimeTo24HrFormat(widget.sunrise) : ConvertTimeTo12HrFormat(widget.sunrise)}"
+              : "Sunset ${provider.is24HrFormat ? ConvertTimeTo24HrFormat(widget.sunset) : ConvertTimeTo12HrFormat(widget.sunset)}",
           style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w200),
         ),
       ],

@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:country_state_city/country_state_city.dart';
+import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
@@ -8,7 +9,11 @@ String ConvertTimeTo12HrFormat(String dateTimeString) {
   String formattedTime = DateFormat("h:mm a").format(dateTime);
   return formattedTime;
 }
-
+String ConvertTimeTo24HrFormat(String dateTimeString) {
+  DateTime dateTime = DateFormat("yyyy-MM-ddTHH:mm").parse(dateTimeString);
+  final formattedTime = DateFormat.Hm().format(dateTime);
+  return formattedTime;
+}
 String dateFormatter(DateTime date) {
   dynamic dayData =
       '{ "1" : "Mon", "2" : "Tue", "3" : "Wed", "4" : "Thu", "5" : "Fri", "6" : "Sat", "7" : "Sun" }';

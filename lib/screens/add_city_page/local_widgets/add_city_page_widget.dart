@@ -65,7 +65,10 @@ class _AddCityPageWidgetState extends State<AddCityPageWidget> {
                       overflow: TextOverflow.ellipsis),
                 ),
               ),
-              Text(widget.uvIndex == -1 ? "N/A" :"UV ${uvComment(widget.uvIndex)}",
+              Text(
+                  widget.uvIndex == -1
+                      ? "N/A"
+                      : "UV ${uvComment(widget.uvIndex)}",
                   style: const TextStyle(
                       fontFamily: "Comfortaa",
                       fontSize: 15,

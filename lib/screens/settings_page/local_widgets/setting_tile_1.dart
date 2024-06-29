@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/consts.dart';
-import '../provider/theme_provider.dart';
+import '../provider/settings_provider.dart';
 
 class ThemeTile extends StatefulWidget {
   const ThemeTile({super.key});
@@ -14,9 +14,8 @@ class ThemeTile extends StatefulWidget {
 class _ThemeTileState extends State<ThemeTile> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-        builder: (context, ThemeProvider notifier, child) {
-      return Container(
+    final provider = Provider.of<SettingsProvider>(context);
+    return Container(
         margin: const EdgeInsets.only(top: 15, left: 20, right: 20, bottom: 5),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -45,12 +44,10 @@ class _ThemeTileState extends State<ThemeTile> {
             Transform.scale(
               scale: 0.8,
               child: Switch(
-                  value: notifier.isDark,
-                  onChanged: (value) => notifier.changeTheme()),
+                  value: provider.isDark,
+                  onChanged: (value) => provider.changeTheme()),
             )
           ],
-        ),
-      );
-    });
+        ));
   }
 }

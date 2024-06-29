@@ -1,4 +1,4 @@
-import 'package:aeroaura/screens/settings_page/provider/theme_provider.dart';
+import 'package:aeroaura/screens/settings_page/provider/settings_provider.dart';
 import 'package:aeroaura/utils/routes.dart';
 import 'package:aeroaura/utils/themes.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +18,9 @@ class AeroAura extends StatelessWidget {
         DeviceOrientation.portraitUp
       ]);
     return ChangeNotifierProvider(
-      create: (BuildContext context) => ThemeProvider()..init(),
-      child: Consumer<ThemeProvider>(
-        builder: (context, ThemeProvider notifier, child) {
+      create: (BuildContext context) => SettingsProvider()..init(),
+      child: Consumer<SettingsProvider>(
+        builder: (context, SettingsProvider notifier, child) {
           return MaterialApp.router(
             themeMode: notifier.isDark? ThemeMode.dark : ThemeMode.light,
             theme: AeroTheme.lightTheme,

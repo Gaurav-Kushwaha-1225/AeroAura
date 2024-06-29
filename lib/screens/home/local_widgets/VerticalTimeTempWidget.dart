@@ -4,6 +4,9 @@ import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:aeroaura/utils/consts.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../settings_page/provider/settings_provider.dart';
 
 class VerticalTimeTempWidget extends StatefulWidget {
   final String time;
@@ -25,6 +28,7 @@ class VerticalTimeTempWidget extends StatefulWidget {
 class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SettingsProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(5),
       child: ClipRRect(
@@ -35,19 +39,24 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
             width: 90,
             decoration: BoxDecoration(
               color: Theme.of(context).brightness == Brightness.dark
-                          ? Constants.darkTabColor
-                          : Constants.lightTabColor,
+                  ? Constants.darkTabColor
+                  : Constants.lightTabColor,
               borderRadius: BorderRadius.circular(30),
               border: Border.all(
                   color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.white12
-                          : Colors.black12, width: 1.5, style: BorderStyle.solid),
+                      ? Colors.white12
+                      : Colors.black12,
+                  width: 1.5,
+                  style: BorderStyle.solid),
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(ConvertTimeTo12HrFormat(widget.time),
+                  Text(
+                      provider.is24HrFormat
+                          ? ConvertTimeTo24HrFormat(widget.time)
+                          : ConvertTimeTo12HrFormat(widget.time),
                       style: const TextStyle(
                           fontSize: 15, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 12),
