@@ -1,6 +1,7 @@
 import 'package:aeroaura/screens/settings_page/local_widgets/app_bar.dart';
 import 'package:aeroaura/screens/settings_page/local_widgets/setting_tile_1.dart';
 import 'package:aeroaura/screens/settings_page/local_widgets/setting_tile_2.dart';
+import 'package:aeroaura/screens/settings_page/local_widgets/setting_tile_3.dart';
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -25,7 +26,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 padding: const EdgeInsets.only(bottom: 5, top: 15),
                 children: const [
                   ThemeTile(),
-                  TimeFormatTile()
+                  TimeFormatTile(),
+                  TemperatureTile()
             ])));
   }
 }

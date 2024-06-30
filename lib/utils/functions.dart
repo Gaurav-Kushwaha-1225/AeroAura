@@ -14,6 +14,13 @@ String ConvertTimeTo24HrFormat(String dateTimeString) {
   final formattedTime = DateFormat.Hm().format(dateTime);
   return formattedTime;
 }
+
+String CelciusToFahrenheit(String celcius) {
+  int temp = int.parse(celcius);
+  int fahrenheit = ((temp * 9 / 5) + 32).round();
+  return fahrenheit.toString();
+}
+
 String dateFormatter(DateTime date) {
   dynamic dayData =
       '{ "1" : "Mon", "2" : "Tue", "3" : "Wed", "4" : "Thu", "5" : "Fri", "6" : "Sat", "7" : "Sun" }';

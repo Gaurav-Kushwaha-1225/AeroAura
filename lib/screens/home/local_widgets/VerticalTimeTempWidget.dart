@@ -81,12 +81,12 @@ class _VerticalTimeTempWidgetState extends State<VerticalTimeTempWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(widget.temp,
+                      Text(provider.isDegreeCelcius ? widget.temp : CelciusToFahrenheit(widget.temp),
                           style: const TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w600)),
                       const SizedBox(width: 2),
-                      const Text("°C",
-                          style: TextStyle(
+                      Text(provider.isDegreeCelcius ? "°C" : "°F",
+                          style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                           ),

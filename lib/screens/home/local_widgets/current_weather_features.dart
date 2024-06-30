@@ -3,6 +3,9 @@
 import 'package:aeroaura/screens/home/local_widgets/current_weather_features_widget.dart';
 import 'package:aeroaura/utils/functions.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../../settings_page/provider/settings_provider.dart';
 
 class CurrentWeatherFeatures extends StatefulWidget {
   final Map<String, dynamic> current;
@@ -29,6 +32,7 @@ class CurrentWeatherFeatures extends StatefulWidget {
 class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SettingsProvider>(context);
     return GridView.count(
       crossAxisCount: 3,
       shrinkWrap: true,
@@ -42,20 +46,32 @@ class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
             feature: "Max Temp",
             icon: CupertinoIcons.sun_max_fill,
             value: widget.isToday
-                ? "${widget.daily["temperature_2m_max"][0].round()} °C"
-                : "${widget.daily["temperature_2m_max"][1].round()} °C"),
+                ? provider.isDegreeCelcius
+                    ? "${widget.daily["temperature_2m_max"][0].round()} °C"
+                    : "${CelciusToFahrenheit(widget.daily["temperature_2m_max"][0].round().toString())} °F"
+                : provider.isDegreeCelcius
+                    ? "${widget.daily["temperature_2m_max"][1].round()} °C"
+                    : "${CelciusToFahrenheit(widget.daily["temperature_2m_max"][1].round().toString())} °F"),
         CurrentWeatherFeaturesWidget(
             feature: "Min Temp",
             icon: CupertinoIcons.sun_min_fill,
             value: widget.isToday
-                ? "${widget.daily["temperature_2m_min"][0].round()} °C"
-                : "${widget.daily["temperature_2m_min"][1].round()} °C"),
+                ? provider.isDegreeCelcius
+                    ? "${widget.daily["temperature_2m_min"][0].round()} °C"
+                    : "${CelciusToFahrenheit(widget.daily["temperature_2m_min"][0].round().toString())} °F"
+                : provider.isDegreeCelcius
+                    ? "${widget.daily["temperature_2m_min"][1].round()} °C"
+                    : "${CelciusToFahrenheit(widget.daily["temperature_2m_min"][1].round().toString())} °F"),
         CurrentWeatherFeaturesWidget(
             feature: "Feels Like",
             icon: CupertinoIcons.thermometer_sun,
             value: widget.isToday
-                ? "${widget.current["apparent_temperature"].round()} °C"
-                : "${widget.hourly["apparent_temperature"].last.round()} °C"),
+                ? provider.isDegreeCelcius
+                    ? "${widget.current["apparent_temperature"].round()} °C"
+                    : "${CelciusToFahrenheit(widget.current["apparent_temperature"].round().toString())} °F"
+                : provider.isDegreeCelcius
+                    ? "${widget.hourly["apparent_temperature"].last.round()} °C"
+                    : "${CelciusToFahrenheit(widget.hourly["apparent_temperature"].last.round().toString())} °F"),
         CurrentWeatherFeaturesWidget(
             feature: "Rain's Odds",
             icon: CupertinoIcons.cloud_rain_fill,
@@ -84,7 +100,7 @@ class _CurrentWeatherFeaturesState extends State<CurrentWeatherFeatures> {
             feature: "Humidity",
             icon: CupertinoIcons.drop_fill,
             value: widget.isToday
-                ?  "${widget.current["relative_humidity_2m"].round()} %"
+                ? "${widget.current["relative_humidity_2m"].round()} %"
                 : "${widget.hourly["relative_humidity_2m"].last.round()} %"),
         CurrentWeatherFeaturesWidget(
             feature: "Air pressure",

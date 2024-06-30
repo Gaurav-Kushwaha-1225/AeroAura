@@ -16,8 +16,8 @@ class SettingsProvider extends ChangeNotifier {
   init() async {
     storage = await SharedPreferences.getInstance();
     _isDark = storage.getBool("isDark") ?? false;
-    storage = await SharedPreferences.getInstance();
     _is24HrFormat = storage.getBool("is24HrFormat") ?? false;
+    _isDegreeCelcius = storage.getBool("isDegreeCelcius") ?? false;
     notifyListeners();
   }
 
@@ -27,6 +27,15 @@ class SettingsProvider extends ChangeNotifier {
   changeTimeFormat() {
     _is24HrFormat = !is24HrFormat;
     storage.setBool("is24HrFormat", _is24HrFormat);
+    notifyListeners();
+  }
+
+  bool _isDegreeCelcius = true;
+  bool get isDegreeCelcius => _isDegreeCelcius;
+
+  changeTemperatureUnit() {
+    _isDegreeCelcius = !isDegreeCelcius;
+    storage.setBool("isDegreeCelcius", _isDegreeCelcius);
     notifyListeners();
   }
 }

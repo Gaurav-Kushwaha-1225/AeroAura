@@ -1,6 +1,10 @@
 import 'package:aeroaura/utils/consts.dart';
+import 'package:aeroaura/utils/functions.dart';
 import 'package:aeroaura/utils/wmo_code_to_comment.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../settings_page/provider/settings_provider.dart';
 
 class WeatherCardTempMaxMinWidget extends StatelessWidget {
   final String wmoCode;
@@ -14,6 +18,7 @@ class WeatherCardTempMaxMinWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SettingsProvider>(context);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -46,13 +51,16 @@ class WeatherCardTempMaxMinWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("${tempMax.round()} / ${tempMin.round()}",
+                Text(
+                    provider.isDegreeCelcius
+                        ? "${tempMax.round()} / ${tempMin.round()}"
+                        : "${CelciusToFahrenheit(tempMax.round().toString())} / ${CelciusToFahrenheit(tempMin.round().toString())}",
                     style: const TextStyle(
                         fontSize: 20,
                         fontFamily: "Comfortaa",
                         fontWeight: FontWeight.bold)),
-                const Text(" °C",
-                    style: TextStyle(
+                Text(provider.isDegreeCelcius ? " °C" : " °F",
+                    style: const TextStyle(
                         fontSize: 15,
                         fontFamily: "Comfortaa",
                         fontWeight: FontWeight.bold)),
