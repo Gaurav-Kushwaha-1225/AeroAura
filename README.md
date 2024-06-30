@@ -86,7 +86,7 @@ We fetch weather data from [Open-Meteo](https://open-meteo.com/en/docs) and use 
 
 - [X] 🌆 **~~Choose Your City Option:~~** ~~(Set your location or add other cities to your list.)~~
 - [ ] 🧮 **Flexible Measurement Units:** Customize your measurement system for temperature and more.
-- [ ] 🌡️ **Celsius or Fahrenheit:** Pick your preferred temperature unit.
+- [X] 🌡️ **~~Celsius or Fahrenheit:~~** ~~Pick your preferred temperature unit.~~
 - [X] 🕰️ **~~12-Hour or 24-Hour Time Formats:~~** ~~(Adjust the time display to your liking.)~~
 - [X] **~~Theme switcher~~** ~~(Light and dark mode using a toggle button in settings page.)~~
 - [X] **~~Add Directory Structure to README.md~~**
